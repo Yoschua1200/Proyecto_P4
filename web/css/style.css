@@ -1,0 +1,68 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{
+	background-color: #1c1d1f;
+}
+.row{
+	color:white!important;
+}
+ .color-menu{
+	background-color:#5624d0!important;
+}
+.dropdown-menu {
+	background-color:#5624d0!important;
+}
+.color-menu a{
+	color:white;
+}
+html {
+  min-height: 100%;
+  position: relative;
+}
+body {
+  margin: 0;
+  margin-bottom: 40px;
+}
+.texto-login{
+	color:white;
+	text-align: center;
+}
+.resultado{
+    color:white!important;
+}
+.columna-login{
+	border-radius: 10px;
+	background-color: #5624d0!important;	
+}
+.texto-centrado{ 
+	text-align: center;
+	color:white;
+}
+footer {
+  background-color:#5624d0!important;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  color: white;
+  text-align: center;
+}
+.pie{
+    padding-top: 5px;
+}
+.titulos{
+    text-decoration: underline;
+}
+a {
+    color: white; 
+    text-decoration: none;
+}
+a:hover {
+    color: white; 
+    text-decoration: none;
+}
+a:visited {
+    color: white; 
+    text-decoration: none;
+}
