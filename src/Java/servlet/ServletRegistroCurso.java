@@ -5,6 +5,8 @@
  */
 package servlet;
 
+import Datos.CursosDatos;
+import Logica.Curso;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -19,18 +21,12 @@ import javax.servlet.http.HttpServletResponse;
  */
 //CONTROLADOR log
 @WebServlet(name = "ServletRegistroCurso", 
-        urlPatterns = {"/RegistroCurso", "/EditarCurso", "/VerCurso", "/Eliminar", "/Consulta"})
+                urlPatterns = {"/RegistroCurso", "/EditarCurso", 
+                                "/VerCurso", "/Eliminar", "/Consultar", "/Matricular"})
 public class ServletRegistroCurso extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    Curso curso = new Curso();
+    CursosDatos cursosdatos = new CursosDatos();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         /*String placa = request.getParameter("placa");
@@ -55,48 +51,47 @@ public class ServletRegistroCurso extends HttpServlet {
             request.setAttribute("status", status);
             String logo = request.getParameter("logo");
             request.setAttribute("logo", logo);
-            request.getRequestDispatcher("Pruebas.jsp").forward(request, response);
+            
+            curso.setNombre(nombre);
+            curso.setTematica(tematica);
+            curso.setCosto(costo);
+            curso.setStatus(status);
+            curso.setLogo(logo);
+            cursosdatos.agregar(curso);
+            
+            request.getRequestDispatcher("admin.jsp").forward(request, response);
         }else if ("/VerCurso".equals(request.getServletPath())) {
             flag = "ver";
             request.setAttribute("flag", flag);
             request.getRequestDispatcher("Pruebas.jsp").forward(request, response);
+        }else if("/Consultar".equals(request.getServletPath())) {
+            flag = "consulta";
+            request.setAttribute("flag", flag);
+            String nombre = request.getParameter("nombre");
+            request.setAttribute("nombre", nombre);
+            //cursosdatos.consultar(nombre);
+            request.getRequestDispatcher("busqueda.jsp").forward(request, response);
+        }else if("/Consultar".equals(request.getServletPath())) {
+            flag = "consulta";
+            request.setAttribute("flag", flag);
+            String nombre = request.getParameter("nombre");
+            request.setAttribute("nombre", nombre);
+            //cursosdatos.consultar(nombre);
+            request.getRequestDispatcher("busqueda.jsp").forward(request, response);
         }
     }
     
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";

@@ -20,8 +20,8 @@
                         </div>
 		  
 			<div class="col-lg-8"> 
-				<h6>Nombre: Qwerty</h6>
-				<h6>Correo: qwerty@protonmail.com</h6>
+				<h6>Nombre: Posix</h6>
+				<h6>Correo: posix@protonmail.com</h6>
 				<h6>Tel: 884374444</h6>
 		</div>
 		</div>

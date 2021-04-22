@@ -50,22 +50,47 @@ Conexion cnx = new Conexion();
     }
        return lista;
     }
-     /*public static void main(String[] args) {
+    /*public static void main(String[] args) {
          CursosDatos k = new CursosDatos();
          
-         System.out.println(k.listar().toString());
+         //System.out.println(k.listar().toString());
+         System.out.println(k.consultar("Virtual Box").toString());
      }*/
-    public Persona consultar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List consultar(String nombre) {
+        ArrayList<Curso> lista = new ArrayList<>();
+        //String sql = "SELECT * FROM cursos WHERE nombre ='" + nombre +"'";
+        String sql = "SELECT * FROM cursos WHERE nombre LIKE'" + nombre +"%'";
+        try {
+            cn = cnx.getConnection();
+            ps = (PreparedStatement) cn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Curso c = new Curso();
+                c.setCodigo(rs.getInt("codigo"));
+                c.setNombre(rs.getString("nombre"));
+                c.setTematica(rs.getString("tematica"));
+                c.setCosto(rs.getString("costo"));
+                c.setStatus(rs.getString("status"));
+                c.setLogo(rs.getString("logo"));
+                lista.add(c);
+            }
+        } catch (SQLException e) {
+
+        }
+        return lista;
+
     }
     public boolean agregar(Curso cur) {
-        String sql = "insert into cursos(nombre, costo, tematica, status)values('"+cur.getNombre()+"','"+cur.getCosto()+"','"+cur.getTematica()+"','"+cur.getStatus()+"')";
-        try{
-        cn = cnx.getConnection();
-       ps = (PreparedStatement) cn.prepareStatement(sql);
-       ps.executeUpdate();
-        }catch(SQLException e){
-          return false;  
+        String sql = "insert into cursos(nombre, tematica, costo, status, logo)"
+                + "values('" + cur.getNombre() + "','" 
+                + cur.getTematica() + "','" + cur.getCosto()
+                + "','" + cur.getStatus() + "','" + cur.getLogo() +"')";
+        try {
+            cn = cnx.getConnection();
+            ps = (PreparedStatement) cn.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            return false;
         }
         return true;
     }

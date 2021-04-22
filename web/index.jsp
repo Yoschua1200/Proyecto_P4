@@ -15,12 +15,14 @@
 <link href="css/bootstrap-4.4.1.css" rel="stylesheet" type="text/css">
 <link href="css/style.css" rel="stylesheet" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="shortcut icon" href="images/logo.ico" type="">
 
 </head>
 
 <body style="padding-top: 70px; padding-bottom: 70px;">
-    
+<br>
 <%@ include file="header.jsp" %>
+
 <div class="container-fluid">
 <div class="row texto-centrado">
     <div class="col-lg-2">
@@ -35,39 +37,12 @@
 </div>
 </div>
 
-<div class="row texto-centrado">
-    <div class="col-lg-2">
 
-    </div>
-    <div class="col-lg-8">
-
-        <form action="RegistroCurso" method="POST">
-            <h3> Registrar curso </h3> 
-            <input type="text" name="codigo" placeholder="Código">
-            <input type="text" name="nombre" placeholder="Nombre">
-            <input type="text" name="tematica" placeholder="Temática">
-            <input type="text" name="costo" placeholder="Costo">
-            <input type="text" name="status" placeholder="Status">
-            <input type="text" name="logo" placeholder="Logo">
-
-            <input type="submit" value="Consultar">
-        </form>
-
-        <!-- <form action="RegistroCurso" method="POST">
-            registrar curso <input type="text" name="placa">
-            <input type="submit" value="Consultar">
-        </form>*
-        -->
-    </div>
-    <div class="col-lg-2">
-
-    </div>
-</div>
 </div>
 
 
 
-
+<!--
 <div class="row texto-centrado">
     <div class="col-lg-2">
 
@@ -84,6 +59,24 @@
 
     </div>
 </div>
+
+<div class="row texto-centrado">
+    <div class="col-lg-2">
+
+    </div>
+    <div class="col-lg-8">
+
+        <form action="Consultar" method="POST">
+            <h3> Wachar </h3> 
+            <input type="text" name="nombre" placeholder="Nombre">
+            <input type="submit" value="Consultar">
+        </form>
+
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>-->
 </div>
 </body>
 <%@ include file="footer.jsp" %>

@@ -42,7 +42,13 @@
         <%}else if(flag=="registrar"){ %>
             <h2>REGISTRO</h2>
         <% }%> 
-        
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Temática</th>
+                </tr>
+            </thead>
         <% 
             CursosDatos curso = new CursosDatos();
             List<Curso>list=curso.listar();
@@ -51,11 +57,17 @@
             while(iter.hasNext()){
                 c=iter.next();
         %>
+        <tbody>
             <tr>
                 <td> 
                     <%= c.getNombre() %> 
                 </td>
+                <td> 
+                    <%= c.getTematica()%> 
+                </td>
             </tr>
             <%}%>
+        </tbody>
+        </table>
     </body>
 </html>

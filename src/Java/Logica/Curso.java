@@ -13,17 +13,25 @@ public class Curso {
 
     @Override
     public String toString() {
-        return "Curso{" + "nombre=" + nombre + ", tematica=" + tematica + ", logo=" + logo + ", costo=" + costo + ", status=" + status + '}';
+        return "Curso{" + "codigo=" + codigo + "nombre=" + nombre + ", tematica=" + tematica + ", logo=" + logo + ", costo=" + costo + ", status=" + status + '}';
     }
     
-    public Curso(String nombre, String tematica, String costo, String status, String logo) {
+    public Curso(int codigo, String nombre, String tematica, String costo, String status, String logo) {
+        this.codigo = codigo;
         this.nombre = nombre;
         this.tematica = tematica;
         this.logo = logo;
         this.costo = costo;
         this.status = status;
     }
+    public int getCodigo() {
+        return codigo;
+    }
 
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+    
     public String getNombre() {
         return nombre;
     }
@@ -63,6 +71,7 @@ public class Curso {
     public void setStatus(String status) {
         this.status = status;
     }
+    private int codigo;
     private String nombre;
     private String tematica;
     private String logo;
@@ -70,6 +79,7 @@ public class Curso {
     private String status;
 
     public Curso() {
+        this.codigo = 0;
         this.nombre = "";
         this.tematica = "";
         this.logo = "";
