@@ -5,7 +5,7 @@
  */
 package Datos;
 
-import Logica.Estudiante;
+import Logica.Administrador;
 import Logica.Persona;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
@@ -18,28 +18,27 @@ import java.util.List;
  *
  * @author Boris Monge
  */
-
-public class EstudianteDatos implements CRUD {
+public class AdministradorDatos implements CRUD {
 Conexion cnx = new Conexion();
        Connection cn;
        PreparedStatement ps;
        ResultSet rs;
-       Persona p = new Estudiante();
+       Persona a = new Administrador();
        
     @Override
     public List listar() {
         
        ArrayList<Persona>lista = new ArrayList<>();
-       String sql = "select * from estudiantes";
+       String sql = "select * from administradores";
        try{
        cn = cnx.getConnection();
        ps = (PreparedStatement) cn.prepareStatement(sql);
        rs = ps.executeQuery();
        while(rs.next()){
-           p.setCedula(rs.getInt("id"));
-           p.setCorreo(rs.getString("correo electronico"));
-           p.setNombre(rs.getString("nombre"));
-           p.setTelefono(rs.getString("telefono"));
+           a.setCedula(rs.getInt("id"));
+           a.setCorreo(rs.getString("correo electronico"));
+           a.setNombre(rs.getString("nombre"));
+           a.setTelefono(rs.getString("telefono"));
        }
        
     }catch(SQLException e){
@@ -53,28 +52,28 @@ Conexion cnx = new Conexion();
     public Persona consultar(int id) {
        
    
-        String sql = "SELECT * FROM estudiantes WHERE id LIKE'" + id;
+        String sql = "SELECT * FROM administradores WHERE id LIKE'" + id;
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-           p.setCedula(rs.getInt("id"));
-           p.setCorreo(rs.getString("correo electronico"));
-           p.setNombre(rs.getString("nombre"));
-           p.setTelefono(rs.getString("telefono"));
+           a.setCedula(rs.getInt("id"));
+           a.setCorreo(rs.getString("correo electronico"));
+           a.setNombre(rs.getString("nombre"));
+           a.setTelefono(rs.getString("telefono"));
         
             }
         } catch (SQLException e) {
 
         }
-        return p;
+        return a;
 
     }
 
     @Override
     public boolean agregar(Persona per) {
-          String sql = "insert into estudiantes(nombre, correo electronico, telefono)"
+          String sql = "insert into administradores(nombre, correo electronico, telefono)"
                 + "values('" + per.getNombre() + "','" 
                 + per.getCorreo()+ "','" + per.getTelefono()
                 + "','" + per.getTelefono()+"')";
@@ -95,7 +94,7 @@ Conexion cnx = new Conexion();
 
     @Override
     public boolean eliminar(int id) {
-         String sql = "delete from estudiantes where id="+id;
+         String sql = "delete from administradores where id="+id;
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);

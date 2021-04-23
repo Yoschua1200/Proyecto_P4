@@ -11,32 +11,31 @@ package Logica;
  */
 public class Usuario  implements java.io.Serializable {
 
-
-     private String cedula;
+     private int id;
      private String clave;
      private int tipo;
+     
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
 
     public Usuario() {
+        this.id = 0;
+        this.clave = "";
+        this.tipo = 0;
     }
-
-	
-    public Usuario(String cedula) {
-        this.cedula = cedula;
-    }
-    public Usuario(String cedula, String clave, int tipo) {
-       this.cedula = cedula;
+    
+    public Usuario(int id, String clave, int tipo) {
+       this.id = id;
        this.clave = clave;
        this.tipo = tipo;
     }
    
-    public String getCedula() {
-        return this.cedula;
-    }
-    
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
-    }
     public String getClave() {
         return this.clave;
     }

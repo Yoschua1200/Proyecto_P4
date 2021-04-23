@@ -14,16 +14,25 @@ import java.util.List;
  */
 public class Profesor extends Persona{
 
+
+    public List<String> getEspecialidades() {
+        return especialidades;
+    }
+
     public Profesor(String nombre, int cedula, String correo, String telefono, Usuario usuario) {
         super(nombre, cedula, correo, telefono, usuario);
     }
    private List<String> especialidades = new ArrayList<String>();
-   private List<Curso> cursos = new ArrayList<Curso>();
 
-void AgregarEspecialidad(String especialidad){
+    public Profesor() {
+     super("",0,"","",null);
+    }
+  
+
+public void AgregarEspecialidad(String especialidad){
     especialidades.add(especialidad);
 }
-boolean EliminarEspecialidad(String especialidad){
+public boolean EliminarEspecialidad(String especialidad){
     for(int i = 0; i < especialidades.size(); i++)
         if(especialidades.get(i).equalsIgnoreCase(especialidad)){
             especialidades.remove(i);
@@ -32,8 +41,6 @@ boolean EliminarEspecialidad(String especialidad){
     return false;
 }
 
-void AgregarCurso(Curso curso){
-    cursos.add(curso);
-}
+
 
 }

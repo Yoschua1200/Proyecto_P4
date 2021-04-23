@@ -6,6 +6,7 @@
 package Datos;
 import com.mysql.jdbc.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 public class Conexion {
     public Connection getConnection() {
         return con;
@@ -16,7 +17,7 @@ public class Conexion {
             Class.forName("com.mysql.jdbc.Driver");
             con=(Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/dbprueba?allowPublicKeyRetrieval=true&useSSL=false", "root", "");
             
-        }catch(Exception e){
+        }catch(ClassNotFoundException | SQLException e){
             System.err.println("Error: " +e);
         }
     }

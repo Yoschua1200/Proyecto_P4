@@ -6,8 +6,7 @@
 package Datos;
 
 import Logica.Curso;
-import Logica.Estudiante;
-import Logica.Persona;
+import Logica.Grupo;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,13 +18,12 @@ import java.util.List;
  *
  * @author Boris Monge
  */
-
-public class CursosDatos {
+public class GrupoDatos {
 Conexion cnx = new Conexion();
        Connection cn;
        PreparedStatement ps;
        ResultSet rs;
-       Curso cur = new Curso();
+       Grupo g = new Grupo();
        
     
     public List listar() {
@@ -37,13 +35,7 @@ Conexion cnx = new Conexion();
             ps = (PreparedStatement)cn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Curso c = new Curso();
-                c.setNombre(rs.getString("nombre"));
-                c.setTematica(rs.getString("tematica"));
-                c.setCosto(rs.getString("costo"));
-                c.setStatus(rs.getString("status"));
-                c.setLogo(rs.getString("logo"));
-                lista.add(c);
+              
             }
     }catch(SQLException e){
         
@@ -65,14 +57,7 @@ Conexion cnx = new Conexion();
             ps = (PreparedStatement) cn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Curso c = new Curso();
-                c.setCodigo(rs.getInt("codigo"));
-                c.setNombre(rs.getString("nombre"));
-                c.setTematica(rs.getString("tematica"));
-                c.setCosto(rs.getString("costo"));
-                c.setStatus(rs.getString("status"));
-                c.setLogo(rs.getString("logo"));
-                lista.add(c);
+               
             }
         } catch (SQLException e) {
 
@@ -101,8 +86,16 @@ Conexion cnx = new Conexion();
     }
 
    
-    public boolean eliminar(Curso cur) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean eliminar(int id) {
+        String sql = "delete from cursos where id="+id;
+        try {
+            cn = cnx.getConnection();
+            ps = (PreparedStatement) cn.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            return false;
+        }
+        return true;
     }
     
 }

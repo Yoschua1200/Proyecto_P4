@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlet;
+package Presentacion.Cursos;
 
-import Datos.CursosDatos;
+import Datos.CursoDatos;
 import Logica.Curso;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,10 +23,10 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "ServletRegistroCurso", 
                 urlPatterns = {"/RegistroCurso", "/EditarCurso", 
                                 "/VerCurso", "/Eliminar", "/Consultar", "/Matricular"})
-public class ServletRegistroCurso extends HttpServlet {
+public class ControladorCurso extends HttpServlet {
 
     Curso curso = new Curso();
-    CursosDatos cursosdatos = new CursosDatos();
+    CursoDatos cursosdatos = new CursoDatos();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         /*String placa = request.getParameter("placa");

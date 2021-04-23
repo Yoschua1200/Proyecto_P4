@@ -5,8 +5,8 @@
  */
 package Datos;
 
-import Logica.Estudiante;
 import Logica.Persona;
+import Logica.Profesor;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,19 +18,18 @@ import java.util.List;
  *
  * @author Boris Monge
  */
-
-public class EstudianteDatos implements CRUD {
+public class ProfesorDatos implements CRUD {
 Conexion cnx = new Conexion();
        Connection cn;
        PreparedStatement ps;
        ResultSet rs;
-       Persona p = new Estudiante();
+       Profesor p = new Profesor();
        
     @Override
     public List listar() {
         
        ArrayList<Persona>lista = new ArrayList<>();
-       String sql = "select * from estudiantes";
+       String sql = "select * from profesores";
        try{
        cn = cnx.getConnection();
        ps = (PreparedStatement) cn.prepareStatement(sql);
@@ -40,6 +39,9 @@ Conexion cnx = new Conexion();
            p.setCorreo(rs.getString("correo electronico"));
            p.setNombre(rs.getString("nombre"));
            p.setTelefono(rs.getString("telefono"));
+           p.AgregarEspecialidad(rs.getString("especialiad 1"));
+           p.AgregarEspecialidad(rs.getString("especialiad 2"));
+           p.AgregarEspecialidad(rs.getString("especialiad 3"));
        }
        
     }catch(SQLException e){
@@ -53,7 +55,7 @@ Conexion cnx = new Conexion();
     public Persona consultar(int id) {
        
    
-        String sql = "SELECT * FROM estudiantes WHERE id LIKE'" + id;
+        String sql = "SELECT * FROM profesores WHERE id LIKE'" + id;
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);
@@ -63,7 +65,9 @@ Conexion cnx = new Conexion();
            p.setCorreo(rs.getString("correo electronico"));
            p.setNombre(rs.getString("nombre"));
            p.setTelefono(rs.getString("telefono"));
-        
+           p.AgregarEspecialidad(rs.getString("especialiad 1"));
+           p.AgregarEspecialidad(rs.getString("especialiad 2"));
+           p.AgregarEspecialidad(rs.getString("especialiad 3"));
             }
         } catch (SQLException e) {
 
@@ -74,10 +78,12 @@ Conexion cnx = new Conexion();
 
     @Override
     public boolean agregar(Persona per) {
-          String sql = "insert into estudiantes(nombre, correo electronico, telefono)"
-                + "values('" + per.getNombre() + "','" 
-                + per.getCorreo()+ "','" + per.getTelefono()
-                + "','" + per.getTelefono()+"')";
+        Profesor p = (Profesor) per;
+
+          String sql = "insert into profesores(nombre, correo electronico, telefono, especialidad 1, especialidad 2, especialidad 3)"
+                + "values('" + p.getNombre() + "','" 
+                + p.getCorreo()+ "','" + p.getTelefono()
+                + "','" + p.getTelefono()+"','" + p.getEspecialidades().get(0) + p.getEspecialidades().get(1) + p.getEspecialidades().get(2)+"')";
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);
@@ -95,7 +101,7 @@ Conexion cnx = new Conexion();
 
     @Override
     public boolean eliminar(int id) {
-         String sql = "delete from estudiantes where id="+id;
+         String sql = "delete from profesores where id="+id;
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);

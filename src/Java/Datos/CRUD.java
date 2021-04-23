@@ -17,5 +17,5 @@ public interface CRUD {
     public Persona consultar(int id);
     public boolean agregar(Persona per);
     public boolean editar(Persona per);
-    public boolean eliminar(Persona per);
+    public boolean eliminar(int id);
 }

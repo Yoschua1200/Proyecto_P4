@@ -5,8 +5,8 @@
  */
 package Datos;
 
-import Logica.Estudiante;
-import Logica.Persona;
+import Logica.Curso;
+import Logica.Usuario;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,66 +18,63 @@ import java.util.List;
  *
  * @author Boris Monge
  */
-
-public class EstudianteDatos implements CRUD {
+public class UsuarioDatos {
 Conexion cnx = new Conexion();
        Connection cn;
        PreparedStatement ps;
        ResultSet rs;
-       Persona p = new Estudiante();
+       Usuario u = new Usuario();
        
-    @Override
+    
     public List listar() {
         
-       ArrayList<Persona>lista = new ArrayList<>();
-       String sql = "select * from estudiantes";
-       try{
-       cn = cnx.getConnection();
-       ps = (PreparedStatement) cn.prepareStatement(sql);
-       rs = ps.executeQuery();
-       while(rs.next()){
-           p.setCedula(rs.getInt("id"));
-           p.setCorreo(rs.getString("correo electronico"));
-           p.setNombre(rs.getString("nombre"));
-           p.setTelefono(rs.getString("telefono"));
-       }
-       
+       ArrayList<Usuario>lista = new ArrayList<>();
+       String sql = "select * from usuarios";
+        try {
+            cn = cnx.getConnection();
+            ps = (PreparedStatement)cn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                u.setId(rs.getInt("id"));
+                u.setClave(rs.getString("clave"));
+                u.setTipo(rs.getInt("tipo"));
+                lista.add(u);
+            }
     }catch(SQLException e){
         
     }
        return lista;
     }
-    
-
-    @Override
-    public Persona consultar(int id) {
-       
-   
-        String sql = "SELECT * FROM estudiantes WHERE id LIKE'" + id;
+    /*public static void main(String[] args) {
+         CursosDatos k = new CursosDatos();
+         
+         //System.out.println(k.listar().toString());
+         System.out.println(k.consultar("Virtual Box").toString());
+     }*/
+    public List consultar(int id) {
+        ArrayList<Usuario> lista = new ArrayList<>();
+        //String sql = "SELECT * FROM cursos WHERE nombre ='" + nombre +"'";
+        String sql = "SELECT * FROM usuarios WHERE id LIKE'" + id +"%'";
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-           p.setCedula(rs.getInt("id"));
-           p.setCorreo(rs.getString("correo electronico"));
-           p.setNombre(rs.getString("nombre"));
-           p.setTelefono(rs.getString("telefono"));
-        
+                u.setId(rs.getInt("id"));
+                u.setClave(rs.getString("clave"));
+                u.setTipo(rs.getInt("tipo"));
+                lista.add(u);
             }
         } catch (SQLException e) {
 
         }
-        return p;
+        return lista;
 
     }
-
-    @Override
-    public boolean agregar(Persona per) {
-          String sql = "insert into estudiantes(nombre, correo electronico, telefono)"
-                + "values('" + per.getNombre() + "','" 
-                + per.getCorreo()+ "','" + per.getTelefono()
-                + "','" + per.getTelefono()+"')";
+    public boolean agregar(Usuario u) {
+        String sql = "insert into usuarios(id, clave, tipo)"
+                + "values('" + u.getId() + "','" 
+                + u.getClave()+ "','" + u.getTipo() +"')";
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);
@@ -88,14 +85,14 @@ Conexion cnx = new Conexion();
         return true;
     }
 
-    @Override
-    public boolean editar(Persona per) {
+    
+    public boolean editar(Curso cur) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
+   
     public boolean eliminar(int id) {
-         String sql = "delete from estudiantes where id="+id;
+        String sql = "delete from usuarios where id="+id;
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);
