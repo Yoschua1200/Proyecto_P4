@@ -15,7 +15,7 @@ public class Conexion {
    public Conexion(){
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            con=(Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/dbprueba?allowPublicKeyRetrieval=true&useSSL=false", "root", "");
+            con=(Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/dbprueba?SSL=false", "root", "");
             
         }catch(ClassNotFoundException | SQLException e){
             System.err.println("Error: " +e);

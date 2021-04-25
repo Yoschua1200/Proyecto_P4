@@ -5,7 +5,7 @@
 --%>
 <%
     boolean usuario=true;
-    int tipoUsuario=0;         
+    int tipoUsuario=1;         
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

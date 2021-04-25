@@ -6,9 +6,8 @@
 <%@page import="java.util.Iterator"%>
 <%@page import="Logica.Curso"%>
 <%@page import="java.util.List"%>
-<%@page import="Datos.CursosDatos"%>
-<%@page import="Datos.CursosDatos"%>
-<%@page import="Datos.CursosDatos"%>
+<%@page import="Datos.CursoDatos"%>
+
 <%
     String nombre = (String) request.getAttribute("nombre");
 %>
@@ -27,7 +26,7 @@
 
             <%
                 if (nombre != "") {
-                    CursosDatos curso = new CursosDatos();
+                    CursoDatos curso = new CursoDatos();
                     List<Curso> list = curso.consultar(nombre);
                     Iterator<Curso> iter = list.iterator();
                     Curso c = null;
@@ -85,5 +84,6 @@
         </div>
 
     </body>
+    <br>
     <%@ include file="footer.jsp" %>
 </html>
