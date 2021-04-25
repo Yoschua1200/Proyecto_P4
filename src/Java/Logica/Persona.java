@@ -10,7 +10,7 @@ package Logica;
  * @author Boris Monge
  */
 public abstract class Persona {
-    String nombre;
+    private String nombre;
     private int cedula;
     private String correo;
     private String telefono;

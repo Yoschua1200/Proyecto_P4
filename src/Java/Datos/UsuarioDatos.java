@@ -54,7 +54,7 @@ Conexion cnx = new Conexion();
     public List consultar(int id) {
         ArrayList<Usuario> lista = new ArrayList<>();
         //String sql = "SELECT * FROM cursos WHERE nombre ='" + nombre +"'";
-        String sql = "SELECT * FROM usuarios WHERE id LIKE'" + id +"%'";
+        String sql = "SELECT * FROM usuarios WHERE id ='" + id +"%'";
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);

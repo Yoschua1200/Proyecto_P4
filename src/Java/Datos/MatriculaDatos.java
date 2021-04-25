@@ -6,7 +6,9 @@
 package Datos;
 
 import Logica.Curso;
+import Logica.Estudiante;
 import Logica.Grupo;
+import Logica.Matricula;
 import Logica.Profesor;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
@@ -19,29 +21,29 @@ import java.util.List;
  *
  * @author Boris Monge
  */
-public class GrupoDatos {
-Conexion cnx = new Conexion();
+public class MatriculaDatos {
+    Conexion cnx = new Conexion();
        Connection cn;
        PreparedStatement ps;
        ResultSet rs;
        CursoDatos cd = new CursoDatos();
-       ProfesorDatos pf = new ProfesorDatos();
+       EstudianteDatos ed = new EstudianteDatos();
      
        
     
     public List listar() {
-       ArrayList<Grupo>lista = new ArrayList<>();
-       String sql = "select * from grupos";
+       ArrayList<Matricula>lista = new ArrayList<>();
+       String sql = "select * from matricula";
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement)cn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-             Grupo g = new Grupo();
-             g.setCurso(cd.consultarCurso(rs.getString("codigocurso")));
-             g.setProfesor((Profesor) pf.consultar(rs.getInt("cedula")));
-             g.setHora(rs.getString("horario"));
-             lista.add(g);
+             Matricula m = new Matricula();
+             m.setCurso(cd.consultarCurso(rs.getString("id_curso")));
+             m.setEstudiante((Estudiante) ed.consultar(rs.getInt("id_estudiante")));
+             m.setNota(rs.getFloat("nota_estudiante"));
+             lista.add(m);
             }
     }catch(SQLException e){
         
@@ -54,29 +56,28 @@ Conexion cnx = new Conexion();
          //System.out.println(k.listar().toString());
          System.out.println(k.consultar("Virtual Box").toString());
      }*/
-    public Grupo consultar(int id) {
-          Grupo g = new Grupo();
+    public Matricula consultar(int id) {
+          Matricula m = new Matricula();
         //String sql = "SELECT * FROM cursos WHERE nombre ='" + nombre +"'";
-        String sql = "SELECT * FROM cursos WHERE id="+id;
+        String sql = "SELECT * FROM matricula WHERE id="+id;
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-             g.setCurso(cd.consultarCurso(rs.getString("codigocurso")));
-             g.setProfesor((Profesor) pf.consultar(rs.getInt("cedula")));
-             g.setHora(rs.getString("horario"));
+             m.setCurso(cd.consultarCurso(rs.getString("id_curso")));
+             m.setEstudiante((Estudiante) ed.consultar(rs.getInt("estudiante")));
+             m.setNota(rs.getFloat("nota_estudiante"));
             }
         } catch (SQLException e) {
 
         }
-        return g;
+        return m;
 
     }
-    public boolean agregar(Grupo g) {
-        String sql = "insert into grupos(id,cedula,codigocurso,horario)"
-                + "values('" + g.getId() + "','" 
-                + g.getProfesor().getCedula() + "','" + g.getCurso().getCodigo()+"')";
+    public boolean agregar(Matricula m) {
+        String sql = "insert into grupos(id_curso,id_estudiante,nota_estudiante)"
+                + "values('"+ m.getCurso().getCodigo() + "','" + m.getEstudiante().getCedula()+ "','" + m.getNota()+"')";
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);
@@ -94,7 +95,7 @@ Conexion cnx = new Conexion();
 
    
     public boolean eliminar(int id) {
-        String sql = "delete from grupos where cedula="+id;
+        String sql = "delete from matricula where cedula="+id;
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);

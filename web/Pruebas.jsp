@@ -6,7 +6,7 @@
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page import="Logica.Curso"%>
-<%@page import="Datos.CursosDatos"%>
+<%@page import="Datos.CursoDatos"%>
 <%
     /*String placa = request.getParameter("placa");
     String dia = (String)request.getAttribute("dia");*/
@@ -50,7 +50,7 @@
                 </tr>
             </thead>
         <% 
-            CursosDatos curso = new CursosDatos();
+            CursoDatos curso = new CursoDatos();
             List<Curso>list=curso.listar();
             Iterator<Curso>iter=list.iterator();
             Curso c = null;

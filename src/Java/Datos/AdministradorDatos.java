@@ -23,22 +23,24 @@ Conexion cnx = new Conexion();
        Connection cn;
        PreparedStatement ps;
        ResultSet rs;
-       Persona a = new Administrador();
+       
        
     @Override
     public List listar() {
         
        ArrayList<Persona>lista = new ArrayList<>();
-       String sql = "select * from administradores";
+       String sql = "select * from administrador";
        try{
        cn = cnx.getConnection();
        ps = (PreparedStatement) cn.prepareStatement(sql);
        rs = ps.executeQuery();
        while(rs.next()){
-           a.setCedula(rs.getInt("id"));
-           a.setCorreo(rs.getString("correo electronico"));
+           Persona a = new Administrador();
+           a.setCedula(rs.getInt("cedula"));
+           a.setCorreo(rs.getString("correo"));
            a.setNombre(rs.getString("nombre"));
            a.setTelefono(rs.getString("telefono"));
+           lista.add(a);
        }
        
     }catch(SQLException e){
@@ -50,15 +52,15 @@ Conexion cnx = new Conexion();
 
     @Override
     public Persona consultar(int id) {
-       
+       Persona a = new Administrador();
    
-        String sql = "SELECT * FROM administradores WHERE id LIKE'" + id;
+        String sql = "SELECT * FROM administrador WHERE cedula=" + id;
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-           a.setCedula(rs.getInt("id"));
+           a.setCedula(rs.getInt("cedula"));
            a.setCorreo(rs.getString("correo electronico"));
            a.setNombre(rs.getString("nombre"));
            a.setTelefono(rs.getString("telefono"));
@@ -73,10 +75,9 @@ Conexion cnx = new Conexion();
 
     @Override
     public boolean agregar(Persona per) {
-          String sql = "insert into administradores(nombre, correo electronico, telefono)"
-                + "values('" + per.getNombre() + "','" 
-                + per.getCorreo()+ "','" + per.getTelefono()
-                + "','" + per.getTelefono()+"')";
+          String sql = "insert into administrador(cedula, nombre, correo, telefono)"
+                + "values('"+ per.getCedula() +"','" + per.getNombre() + "','" 
+                + per.getCorreo()+ "','" + per.getTelefono()+"')";
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);
@@ -94,7 +95,7 @@ Conexion cnx = new Conexion();
 
     @Override
     public boolean eliminar(int id) {
-         String sql = "delete from administradores where id="+id;
+         String sql = "delete from administradores where cedula="+id;
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);

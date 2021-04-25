@@ -15,6 +15,7 @@ public class Grupo {
         this.profesor = null;
         this.curso = null;
         this.hora = null;
+        this.id = 0;
     }
 
     public Curso getCurso() {
@@ -41,12 +42,24 @@ public class Grupo {
         this.hora = hora;
     }
 
-    public Grupo(Curso curso, Profesor profesor, String hora) {
-        this.curso = curso;
-        this.profesor = profesor;
-        this.hora = hora;
-    }
+   
     private Curso curso;
     private Profesor profesor;
     private String hora;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Grupo(Curso curso, Profesor profesor, String hora, int id) {
+        this.curso = curso;
+        this.profesor = profesor;
+        this.hora = hora;
+        this.id = id;
+    }
 }
