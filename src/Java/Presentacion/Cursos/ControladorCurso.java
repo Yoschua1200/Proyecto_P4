@@ -22,19 +22,13 @@ import javax.servlet.http.HttpServletResponse;
 //CONTROLADOR log
 @WebServlet(name = "ServletRegistroCurso", 
                 urlPatterns = {"/RegistroCurso", "/EditarCurso", 
-                                "/VerCurso", "/Eliminar", "/Consultar", "/Matricular"})
+                                "/VerCurso", "/Eliminar", "/Consultar", "/Matricular", "/Index"})
 public class ControladorCurso extends HttpServlet {
 
     Curso curso = new Curso();
     CursoDatos cursosdatos = new CursoDatos();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        /*String placa = request.getParameter("placa");
-        String restriccion = this.getRestriccion(placa);
-        request.setAttribute("dia", restriccion);
-        
-        request.getRequestDispatcher("Pruebas.jsp").forward(request, response);
-        */
         String flag = "";
         if ("/RegistroCurso".equals(request.getServletPath())) {
             flag = "registrar";
@@ -71,13 +65,13 @@ public class ControladorCurso extends HttpServlet {
             request.setAttribute("nombre", nombre);
             //cursosdatos.consultar(nombre);
             request.getRequestDispatcher("busqueda.jsp").forward(request, response);
-        }else if("/Consultar".equals(request.getServletPath())) {
-            flag = "consulta";
-            request.setAttribute("flag", flag);
-            String nombre = request.getParameter("nombre");
-            request.setAttribute("nombre", nombre);
-            //cursosdatos.consultar(nombre);
-            request.getRequestDispatcher("busqueda.jsp").forward(request, response);
+        }else if("/Index".equals(request.getServletPath())) {
+            flag = "index";
+            //request.setAttribute("flag", flag);
+            //String oferta = "oferta";
+            //request.setAttribute("oferta", oferta);
+            ///cursosdatos.consultar(nombre);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
     

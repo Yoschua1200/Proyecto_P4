@@ -80,6 +80,31 @@ Conexion cnx = new Conexion();
         return lista;
 
     }
+        public List ofertaCurso() {
+        ArrayList<Curso> lista = new ArrayList<>();
+        String sql = "SELECT * FROM cursos WHERE status='Oferta'";
+        try {
+            cn = cnx.getConnection();
+            ps = (PreparedStatement) cn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Curso c = new Curso();
+                c.setCodigo(rs.getInt("codigo"));
+                c.setNombre(rs.getString("nombre"));
+                c.setTematica(rs.getString("tematica"));
+                c.setCosto(rs.getString("costo"));
+                c.setStatus(rs.getString("status"));
+                c.setLogo(rs.getString("logo"));
+                lista.add(c);
+                
+            }
+        } catch (SQLException e) {
+
+        }
+        return lista;
+
+    }
+    
     public boolean agregar(Curso cur) {
         String sql = "insert into cursos(nombre, tematica, costo, status, logo)"
                 + "values('" + cur.getNombre() + "','" 
