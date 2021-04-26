@@ -25,7 +25,7 @@ Conexion cnx = new Conexion();
        Connection cn;
        PreparedStatement ps;
        ResultSet rs;
-       Curso cur = new Curso();
+       
        
     
     public List listar() {
@@ -66,7 +66,7 @@ Conexion cnx = new Conexion();
             rs = ps.executeQuery();
             while (rs.next()) {
                 Curso c = new Curso();
-                c.setCodigo(rs.getInt("codigo"));
+                c.setCodigo(rs.getString("codigo"));
                 c.setNombre(rs.getString("nombre"));
                 c.setTematica(rs.getString("tematica"));
                 c.setCosto(rs.getString("costo"));
@@ -80,6 +80,30 @@ Conexion cnx = new Conexion();
         return lista;
 
     }
+    
+     public Curso consultarCurso(String codigo) {
+         Curso cur = new Curso();
+        //String sql = "SELECT * FROM cursos WHERE nombre ='" + nombre +"'";
+        String sql = "SELECT * FROM cursos WHERE codigo='" + codigo +"'";
+        try {
+            cn = cnx.getConnection();
+            ps = (PreparedStatement) cn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                cur.setCodigo(rs.getString("codigo"));
+                cur.setNombre(rs.getString("nombre"));
+                cur.setTematica(rs.getString("tematica"));
+                cur.setCosto(rs.getString("costo"));
+                cur.setStatus(rs.getString("status"));
+                cur.setLogo(rs.getString("logo"));
+               
+            }
+        } catch (SQLException e) {
+
+        }
+        return cur;
+
+    }
         public List ofertaCurso() {
         ArrayList<Curso> lista = new ArrayList<>();
         String sql = "SELECT * FROM cursos WHERE status='Oferta'";
@@ -89,7 +113,7 @@ Conexion cnx = new Conexion();
             rs = ps.executeQuery();
             while (rs.next()) {
                 Curso c = new Curso();
-                c.setCodigo(rs.getInt("codigo"));
+                c.setCodigo(rs.getString("codigo"));
                 c.setNombre(rs.getString("nombre"));
                 c.setTematica(rs.getString("tematica"));
                 c.setCosto(rs.getString("costo"));
@@ -106,8 +130,8 @@ Conexion cnx = new Conexion();
     }
     
     public boolean agregar(Curso cur) {
-        String sql = "insert into cursos(nombre, tematica, costo, status, logo)"
-                + "values('" + cur.getNombre() + "','" 
+        String sql = "insert into cursos(codigo, nombre, tematica, costo, status, logo)"
+                + "values('" + cur.getCodigo()+ "','" + cur.getNombre() + "','" 
                 + cur.getTematica() + "','" + cur.getCosto()
                 + "','" + cur.getStatus() + "','" + cur.getLogo() +"')";
         try {
@@ -126,8 +150,18 @@ Conexion cnx = new Conexion();
     }
 
    
-    public boolean eliminar(Curso cur) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean eliminar(String cod) {
+        String sql = "delete from cursos where cedula="+cod;
+        try {
+            cn = cnx.getConnection();
+            ps = (PreparedStatement) cn.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            return false;
+        }
+        return true;
     }
+    
+    
     
 }

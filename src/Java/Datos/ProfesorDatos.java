@@ -23,25 +23,27 @@ Conexion cnx = new Conexion();
        Connection cn;
        PreparedStatement ps;
        ResultSet rs;
-       Profesor p = new Profesor();
+      
        
     @Override
     public List listar() {
         
        ArrayList<Persona>lista = new ArrayList<>();
-       String sql = "select * from profesores";
+       String sql = "select * from profesor";
        try{
        cn = cnx.getConnection();
        ps = (PreparedStatement) cn.prepareStatement(sql);
        rs = ps.executeQuery();
        while(rs.next()){
-           p.setCedula(rs.getInt("id"));
-           p.setCorreo(rs.getString("correo electronico"));
+           Profesor p = new Profesor();
+           p.setCedula(rs.getInt("cedula"));
+           p.setCorreo(rs.getString("correo"));
            p.setNombre(rs.getString("nombre"));
            p.setTelefono(rs.getString("telefono"));
-           p.AgregarEspecialidad(rs.getString("especialiad 1"));
-           p.AgregarEspecialidad(rs.getString("especialiad 2"));
-           p.AgregarEspecialidad(rs.getString("especialiad 3"));
+           p.AgregarEspecialidad(rs.getString("especialiad1"));
+           p.AgregarEspecialidad(rs.getString("especialiad2"));
+           p.AgregarEspecialidad(rs.getString("especialiad3"));
+           lista.add(p);
        }
        
     }catch(SQLException e){
@@ -54,24 +56,25 @@ Conexion cnx = new Conexion();
     @Override
     public Persona consultar(int id) {
        
-   
-        String sql = "SELECT * FROM profesores WHERE id LIKE'" + id;
+    Profesor p = new Profesor();
+        String sql = "SELECT * FROM profesor WHERE cedula =" + id;
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-           p.setCedula(rs.getInt("id"));
-           p.setCorreo(rs.getString("correo electronico"));
+           p.setCedula(rs.getInt("cedula"));
+           p.setCorreo(rs.getString("correo"));
            p.setNombre(rs.getString("nombre"));
            p.setTelefono(rs.getString("telefono"));
-           p.AgregarEspecialidad(rs.getString("especialiad 1"));
-           p.AgregarEspecialidad(rs.getString("especialiad 2"));
-           p.AgregarEspecialidad(rs.getString("especialiad 3"));
+           p.AgregarEspecialidad(rs.getString("especialiad1"));
+           p.AgregarEspecialidad(rs.getString("especialiad2"));
+           p.AgregarEspecialidad(rs.getString("especialiad3"));
             }
         } catch (SQLException e) {
 
         }
+        
         return p;
 
     }
@@ -80,8 +83,8 @@ Conexion cnx = new Conexion();
     public boolean agregar(Persona per) {
         Profesor p = (Profesor) per;
 
-          String sql = "insert into profesores(nombre, correo electronico, telefono, especialidad 1, especialidad 2, especialidad 3)"
-                + "values('" + p.getNombre() + "','" 
+          String sql = "insert into profesores(cedula, nombre, correo electronico, telefono, especialidad1, especialidad2, especialidad3)"
+                + "values('"+ p.getCedula()+ "','"+ p.getNombre() + "','" 
                 + p.getCorreo()+ "','" + p.getTelefono()
                 + "','" + p.getTelefono()+"','" + p.getEspecialidades().get(0) + p.getEspecialidades().get(1) + p.getEspecialidades().get(2)+"')";
         try {
@@ -101,7 +104,7 @@ Conexion cnx = new Conexion();
 
     @Override
     public boolean eliminar(int id) {
-         String sql = "delete from profesores where id="+id;
+         String sql = "delete from profesor where cedula="+id;
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);
