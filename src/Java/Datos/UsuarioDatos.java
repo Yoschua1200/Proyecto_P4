@@ -23,7 +23,7 @@ Conexion cnx = new Conexion();
        Connection cn;
        PreparedStatement ps;
        ResultSet rs;
-       Usuario u = new Usuario();
+      
        
     
     public List listar() {
@@ -34,8 +34,9 @@ Conexion cnx = new Conexion();
             cn = cnx.getConnection();
             ps = (PreparedStatement)cn.prepareStatement(sql);
             rs = ps.executeQuery();
+            Usuario u = new Usuario();
             while (rs.next()) {
-                u.setId(rs.getInt("id"));
+                u.setCedula(rs.getInt("cedula"));
                 u.setClave(rs.getString("clave"));
                 u.setTipo(rs.getInt("tipo"));
                 lista.add(u);
@@ -51,29 +52,30 @@ Conexion cnx = new Conexion();
          //System.out.println(k.listar().toString());
          System.out.println(k.consultar("Virtual Box").toString());
      }*/
-    public List consultar(int id) {
-        ArrayList<Usuario> lista = new ArrayList<>();
+    public Usuario consultar(int id) {
+        Usuario u = new Usuario();
         //String sql = "SELECT * FROM cursos WHERE nombre ='" + nombre +"'";
-        String sql = "SELECT * FROM usuarios WHERE id ='" + id +"%'";
+        String sql = "SELECT * FROM usuarios WHERE id ="+ id;
         try {
+            
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                u.setId(rs.getInt("id"));
+                u.setCedula(rs.getInt("id"));
                 u.setClave(rs.getString("clave"));
                 u.setTipo(rs.getInt("tipo"));
-                lista.add(u);
+              
             }
         } catch (SQLException e) {
 
         }
-        return lista;
+        return u;
 
     }
     public boolean agregar(Usuario u) {
-        String sql = "insert into usuarios(id, clave, tipo)"
-                + "values('" + u.getId() + "','" 
+        String sql = "insert into usuarios(cedula, clave, tipo)"
+                + "values('" + u.getCedula() + "','" 
                 + u.getClave()+ "','" + u.getTipo() +"')";
         try {
             cn = cnx.getConnection();

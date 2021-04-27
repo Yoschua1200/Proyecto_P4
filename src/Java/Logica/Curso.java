@@ -16,7 +16,7 @@ public class Curso {
         return "Curso{" + "codigo=" + codigo + "nombre=" + nombre + ", tematica=" + tematica + ", logo=" + logo + ", costo=" + costo + ", status=" + status + '}';
     }
     
-    public Curso(String codigo, String nombre, String tematica, String costo, String status, String logo) {
+    public Curso(int codigo, String nombre, String tematica, String costo, String status, String logo) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.tematica = tematica;
@@ -24,11 +24,11 @@ public class Curso {
         this.costo = costo;
         this.status = status;
     }
-    public String getCodigo() {
+    public int getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
     
@@ -71,7 +71,7 @@ public class Curso {
     public void setStatus(String status) {
         this.status = status;
     }
-    private String codigo;
+    private int codigo;
     private String nombre;
     private String tematica;
     private String logo;
@@ -79,7 +79,7 @@ public class Curso {
     private String status;
 
     public Curso() {
-        this.codigo = "";
+        this.codigo = 0;
         this.nombre = "";
         this.tematica = "";
         this.logo = "";

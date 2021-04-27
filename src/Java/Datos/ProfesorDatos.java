@@ -29,7 +29,7 @@ Conexion cnx = new Conexion();
     public List listar() {
         
        ArrayList<Persona>lista = new ArrayList<>();
-       String sql = "select * from profesor";
+       String sql = "select * from profesores";
        try{
        cn = cnx.getConnection();
        ps = (PreparedStatement) cn.prepareStatement(sql);
@@ -57,7 +57,7 @@ Conexion cnx = new Conexion();
     public Persona consultar(int id) {
        
     Profesor p = new Profesor();
-        String sql = "SELECT * FROM profesor WHERE cedula =" + id;
+        String sql = "SELECT * FROM profesores WHERE cedula =" + id;
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);
@@ -104,7 +104,7 @@ Conexion cnx = new Conexion();
 
     @Override
     public boolean eliminar(int id) {
-         String sql = "delete from profesor where cedula="+id;
+         String sql = "delete from profesores where cedula="+id;
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);

@@ -38,6 +38,7 @@ Conexion cnx = new Conexion();
             rs = ps.executeQuery();
             while (rs.next()) {
                 Curso c = new Curso();
+                c.setCodigo(rs.getInt("codigo"));
                 c.setNombre(rs.getString("nombre"));
                 c.setTematica(rs.getString("tematica"));
                 c.setCosto(rs.getString("costo"));
@@ -66,7 +67,7 @@ Conexion cnx = new Conexion();
             rs = ps.executeQuery();
             while (rs.next()) {
                 Curso c = new Curso();
-                c.setCodigo(rs.getString("codigo"));
+                c.setCodigo(rs.getInt("codigo"));
                 c.setNombre(rs.getString("nombre"));
                 c.setTematica(rs.getString("tematica"));
                 c.setCosto(rs.getString("costo"));
@@ -81,16 +82,16 @@ Conexion cnx = new Conexion();
 
     }
     
-     public Curso consultarCurso(String codigo) {
+     public Curso consultarCurso(int codigo) {
          Curso cur = new Curso();
         //String sql = "SELECT * FROM cursos WHERE nombre ='" + nombre +"'";
-        String sql = "SELECT * FROM cursos WHERE codigo='" + codigo +"'";
+        String sql = "SELECT * FROM cursos WHERE codigo=" + codigo;
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                cur.setCodigo(rs.getString("codigo"));
+                cur.setCodigo(rs.getInt("codigo"));
                 cur.setNombre(rs.getString("nombre"));
                 cur.setTematica(rs.getString("tematica"));
                 cur.setCosto(rs.getString("costo"));
@@ -113,7 +114,7 @@ Conexion cnx = new Conexion();
             rs = ps.executeQuery();
             while (rs.next()) {
                 Curso c = new Curso();
-                c.setCodigo(rs.getString("codigo"));
+                c.setCodigo(rs.getInt("codigo"));
                 c.setNombre(rs.getString("nombre"));
                 c.setTematica(rs.getString("tematica"));
                 c.setCosto(rs.getString("costo"));

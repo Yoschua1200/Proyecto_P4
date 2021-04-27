@@ -11,14 +11,22 @@ package Logica;
  */
 public class Matricula {
 
-    public String get;
-
-    public Curso getCurso() {
-        return curso;
+    public int getId() {
+        return id;
     }
 
-    public void setCurso(Curso curso) {
-        this.curso = curso;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    
+
+    public Grupo getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(Grupo grupo) {
+        this.grupo = grupo;
     }
 
     public Estudiante getEstudiante() {
@@ -37,17 +45,20 @@ public class Matricula {
         this.nota = nota;
     }
 
-    public Matricula(Curso curso, Estudiante estudiante, float nota) {
-        this.curso = curso;
+    public Matricula(int id, Grupo grupo, Estudiante estudiante, float nota) {
+        this.id = id;
+        this.grupo = grupo;
         this.estudiante = estudiante;
         this.nota = nota;
     }
      public Matricula() {
-        this.curso = null;
+         this.id = 0;
+        this.grupo = null;
         this.estudiante = null;
         this.nota = 0;
     }
-    private Curso curso;
+    private int id;
+    private Grupo grupo;
     private Estudiante estudiante;
     private float nota;
 }

@@ -30,7 +30,7 @@ Conexion cnx = new Conexion();
     public List listar() {
         
        ArrayList<Persona>lista = new ArrayList<>();
-       String sql = "select * from estudiante";
+       String sql = "select * from estudiantes";
        try{
        cn = cnx.getConnection();
        ps = (PreparedStatement) cn.prepareStatement(sql);
@@ -76,7 +76,7 @@ Conexion cnx = new Conexion();
 
     @Override
     public boolean agregar(Persona per) {
-          String sql = "insert into estudiante(cedula, nombre, correo, telefono)"
+          String sql = "insert into estudiantes(cedula, nombre, correo, telefono)"
                 + "values('"+ per.getCedula()+ "','" + per.getNombre() + "','" 
                 + per.getCorreo()+ "','" + per.getTelefono()+"')";
         try {
@@ -96,7 +96,7 @@ Conexion cnx = new Conexion();
 
     @Override
     public boolean eliminar(int id) {
-         String sql = "delete from estudiante where cedula="+id;
+         String sql = "delete from estudiantes where cedula="+id;
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);

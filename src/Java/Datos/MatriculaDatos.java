@@ -26,21 +26,22 @@ public class MatriculaDatos {
        Connection cn;
        PreparedStatement ps;
        ResultSet rs;
-       CursoDatos cd = new CursoDatos();
+       GrupoDatos cd = new GrupoDatos();
        EstudianteDatos ed = new EstudianteDatos();
      
        
     
     public List listar() {
        ArrayList<Matricula>lista = new ArrayList<>();
-       String sql = "select * from matricula";
+       String sql = "select * from matriculas";
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement)cn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
              Matricula m = new Matricula();
-             m.setCurso(cd.consultarCurso(rs.getString("id_curso")));
+             m.setId(rs.getInt("id"));
+             m.setGrupo(cd.consultar(rs.getInt("id_grupo")));
              m.setEstudiante((Estudiante) ed.consultar(rs.getInt("id_estudiante")));
              m.setNota(rs.getFloat("nota_estudiante"));
              lista.add(m);
@@ -59,14 +60,15 @@ public class MatriculaDatos {
     public Matricula consultar(int id) {
           Matricula m = new Matricula();
         //String sql = "SELECT * FROM cursos WHERE nombre ='" + nombre +"'";
-        String sql = "SELECT * FROM matricula WHERE id="+id;
+        String sql = "SELECT * FROM matriculas WHERE id="+id;
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-             m.setCurso(cd.consultarCurso(rs.getString("id_curso")));
-             m.setEstudiante((Estudiante) ed.consultar(rs.getInt("estudiante")));
+             m.setId(rs.getInt("id"));   
+             m.setGrupo(cd.consultar(rs.getInt("id_grupo")));
+             m.setEstudiante((Estudiante) ed.consultar(rs.getInt("id_estudiante")));
              m.setNota(rs.getFloat("nota_estudiante"));
             }
         } catch (SQLException e) {
@@ -76,8 +78,8 @@ public class MatriculaDatos {
 
     }
     public boolean agregar(Matricula m) {
-        String sql = "insert into grupos(id_curso,id_estudiante,nota_estudiante)"
-                + "values('"+ m.getCurso().getCodigo() + "','" + m.getEstudiante().getCedula()+ "','" + m.getNota()+"')";
+        String sql = "insert into matriculas(id,id_grupo,id_estudiante,nota_estudiante)"
+                + "values('"+m.getId()+"','"+ m.getGrupo().getId() + "','" + m.getEstudiante().getCedula()+ "','" + m.getNota()+"')";
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);
@@ -95,7 +97,7 @@ public class MatriculaDatos {
 
    
     public boolean eliminar(int id) {
-        String sql = "delete from matricula where cedula="+id;
+        String sql = "delete from matriculas where cedula="+id;
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);

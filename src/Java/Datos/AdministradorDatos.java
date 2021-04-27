@@ -29,7 +29,7 @@ Conexion cnx = new Conexion();
     public List listar() {
         
        ArrayList<Persona>lista = new ArrayList<>();
-       String sql = "select * from administrador";
+       String sql = "select * from administradores";
        try{
        cn = cnx.getConnection();
        ps = (PreparedStatement) cn.prepareStatement(sql);
@@ -54,7 +54,7 @@ Conexion cnx = new Conexion();
     public Persona consultar(int id) {
        Persona a = new Administrador();
    
-        String sql = "SELECT * FROM administrador WHERE cedula=" + id;
+        String sql = "SELECT * FROM administradores WHERE cedula=" + id;
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);
@@ -75,7 +75,7 @@ Conexion cnx = new Conexion();
 
     @Override
     public boolean agregar(Persona per) {
-          String sql = "insert into administrador(cedula, nombre, correo, telefono)"
+          String sql = "insert into administradores(cedula, nombre, correo, telefono)"
                 + "values('"+ per.getCedula() +"','" + per.getNombre() + "','" 
                 + per.getCorreo()+ "','" + per.getTelefono()+"')";
         try {

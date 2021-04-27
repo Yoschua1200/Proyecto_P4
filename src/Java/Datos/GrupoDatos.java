@@ -38,8 +38,8 @@ Conexion cnx = new Conexion();
             rs = ps.executeQuery();
             while (rs.next()) {
              Grupo g = new Grupo();
-             g.setCurso(cd.consultarCurso(rs.getString("codigocurso")));
-             g.setProfesor((Profesor) pf.consultar(rs.getInt("cedula")));
+             g.setCurso(cd.consultarCurso(rs.getInt("codigo_curso")));
+             g.setProfesor((Profesor) pf.consultar(rs.getInt("cedula_profesor")));
              g.setHora(rs.getString("horario"));
              lista.add(g);
             }
@@ -63,8 +63,8 @@ Conexion cnx = new Conexion();
             ps = (PreparedStatement) cn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-             g.setCurso(cd.consultarCurso(rs.getString("codigocurso")));
-             g.setProfesor((Profesor) pf.consultar(rs.getInt("cedula")));
+             g.setCurso(cd.consultarCurso(rs.getInt("codigo_curso")));
+             g.setProfesor((Profesor) pf.consultar(rs.getInt("cedula_profesor")));
              g.setHora(rs.getString("horario"));
             }
         } catch (SQLException e) {
@@ -74,7 +74,7 @@ Conexion cnx = new Conexion();
 
     }
     public boolean agregar(Grupo g) {
-        String sql = "insert into grupos(id,cedula,codigocurso,horario)"
+        String sql = "insert into grupos(id,cedula_profesor,codigo_curso,horario)"
                 + "values('" + g.getId() + "','" 
                 + g.getProfesor().getCedula() + "','" + g.getCurso().getCodigo()+"')";
         try {
@@ -94,7 +94,7 @@ Conexion cnx = new Conexion();
 
    
     public boolean eliminar(int id) {
-        String sql = "delete from grupos where cedula="+id;
+        String sql = "delete from grupos where id="+id;
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);
