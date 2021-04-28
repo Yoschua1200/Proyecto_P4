@@ -76,9 +76,11 @@ Conexion cnx = new Conexion();
 
     @Override
     public boolean agregar(Persona per) {
-          String sql = "insert into estudiantes(cedula, nombre, correo, telefono)"
-                + "values('"+ per.getCedula()+ "','" + per.getNombre() + "','" 
-                + per.getCorreo()+ "','" + per.getTelefono()+"')";
+          String sql = "insert into estudiante(cedula, nombre, correo, telefono)"
+                        + "values('"+ per.getCedula()+ "','" 
+                        + per.getNombre() + "','" 
+                        + per.getCorreo()+ "','" 
+                        + per.getTelefono()+"')";
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);

@@ -12,23 +12,23 @@
 <div class="container-fluid">
   <div class="row" style="padding-top: 70px">
 	<div class="col-lg-3"></div>
-    <div class="col-lg-6 columna-login">
-	  <h2 class ="texto-login">Login</h2>
-      <form>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Dirección de correo electrónico</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Correo">
+        <div class="col-lg-6 columna-login">
+            <h2 class ="texto-login">Login</h2>
+            <form action="Log" method="POST">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Dirección de correo electrónico</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Correo">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Contraseña</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
+                </div>
+                <div class="form-group">
+                    <h6>¿No estás registrado? <a class="titulos" href="signin.jsp"> ¡Hazlo ahora! </a></h6>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
         </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Contraseña</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
-        </div>
-        <div class="form-group">
-            <h6>¿No estás registrado? <a class="titulos" href="signin.jsp"> ¡Hazlo ahora! </a></h6>
-        </div>
-        <button type="submit" class="btn btn-primary">Enviar</button>
-      </form>
-    </div>
 	<div class="col-lg-3"></div>
   </div>
 </div>

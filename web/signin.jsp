@@ -16,27 +16,28 @@
         <h2 class ="texto-login">
             Sign in
         </h2>
-      <form>
+        
+      <form action="RegistroEstudiante" method="POST">
         <div class="form-group">
           <label>Número de cédula</label>
-          <input type="text" class="form-control" placeholder="Cédula">
+          <input type="text" name="cedula" class="form-control" placeholder="Cédula">
         </div>
         <div class="form-group">
           <label>Nombre</label>
-          <input type="text" class="form-control" placeholder="Nombre">
+          <input type="text" name="nombre" class="form-control" placeholder="Nombre">
         </div>
         <div class="form-group">
           <label>Teléfono</label>
-          <input type="text" class="form-control" placeholder="Teléfono">
+          <input type="text" class="form-control" name="telefono" placeholder="Teléfono">
         </div>
         <div class="form-group">
           <label for="exampleInputEmail1">Dirección de correo electrónico</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Correo">
+          <input type="email" class="form-control" name="correo" id="exampleInputEmail1" placeholder="Correo">
         </div>
-        <div class="form-group">
+        <!--<div class="form-group">
           <label for="exampleInputPassword1">Contraseña</label>
           <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
-        </div>
+        </div>-->
         <div class="form-group">
             <h6>¿Ya estás registrado? <a class="titulos" href="login.jsp"> Inicia sesión </a></h6>
         </div>
