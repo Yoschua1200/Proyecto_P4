@@ -131,10 +131,10 @@ Conexion cnx = new Conexion();
     }
     
     public boolean agregar(Curso cur) {
-        String sql = "insert into cursos(codigo, nombre, tematica, costo, status, logo)"
-                + "values('" + cur.getCodigo()+ "','" + cur.getNombre() + "','" 
-                + cur.getTematica() + "','" + cur.getCosto()
-                + "','" + cur.getStatus() + "','" + cur.getLogo() +"')";
+        String sql = "insert into cursos(nombre, tematica, costo, status, logo)"
+                    + "values('" + cur.getNombre() + "','" 
+                    + cur.getTematica() + "','" + cur.getCosto()
+                    + "','" + cur.getStatus() + "','" + cur.getLogo() +"')";
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);
