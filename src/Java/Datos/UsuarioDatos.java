@@ -74,9 +74,12 @@ Conexion cnx = new Conexion();
 
     }
     public boolean agregar(Usuario u) {
-        String sql = "insert into usuarios(cedula, clave, tipo)"
-                + "values('" + u.getCedula() + "','" 
-                + u.getClave()+ "','" + u.getTipo() +"')";
+        String sql = "insert into usuarios(cedula, contrasena, tipo)"
+                    + "values('" + u.getCedula() 
+                    + "','" 
+                    + u.getClave()
+                    + "','" + u.getTipo() 
+                    +"')";
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);
@@ -103,6 +106,32 @@ Conexion cnx = new Conexion();
             return false;
         }
         return true;
+    }
+    
+    public Usuario validar(int ced, String pass){
+        String sql = "select * from usuarios where cedula=? and contrasena=?";
+
+        int r = 0;
+        try {
+            Usuario usuario = new Usuario();
+            cn = cnx.getConnection();
+            ps = (PreparedStatement) cn.prepareStatement(sql);
+            ps.setInt(1, ced);
+            ps.setString(2, "1234");
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                r = r + 1;
+                usuario.setCedula(rs.getInt("cedula"));
+                usuario.setClave(rs.getString("contrasena"));
+                usuario.setTipo(rs.getInt("tipo"));
+
+            }
+            return usuario;
+        } catch (SQLException e) {
+           
+        }
+        return null;
     }
     
 }

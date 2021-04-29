@@ -4,9 +4,18 @@
     Author     : Danny
 --%>
 <%
-    boolean usuario=true;
-    int tipoUsuario=0;         
+    String usuario="false";
+    String tipoUsuario = "3";
+        if (request.getSession().getAttribute("banderaLogin") != null) {
+            usuario=(String) request.getSession().getAttribute("banderaLoginDos");
+
+            if (request.getSession().getAttribute("tipo") != null) {
+               tipoUsuario = (String) request.getSession().getAttribute("tipo");
+            }
+        }
 %>
+
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
@@ -32,26 +41,19 @@
         </ul>
         <ul class="navbar-nav ml-auto">
             
-            <% if(usuario!=false){ 
-                 if(tipoUsuario==0){
-            %>
-            <li>
-                 <a class="nav-link" href="admin.jsp">Administración <span class="sr-only">(current)</span></a> 
-            </li>    
-            <% }else if(tipoUsuario==1){ %>
-            <li>
-                 <a class="nav-link" href="estudiante.jsp">Estudiante <span class="sr-only">(current)</span></a> 
-            </li>
-            <% }else{ %> 
-            <li>
-                 <a class="nav-link" href="profesor.jsp">Profesor <span class="sr-only">(current)</span></a> 
-            </li>      
+            <% if(usuario!="false"){ 
+                if(tipoUsuario=="0"){
+            %>  <li><a class="nav-link" href="admin.jsp">Administración <span class="sr-only">(current)</span></a></li>    
+            <% }else if(tipoUsuario=="1"){ %>
+                <li><a class="nav-link" href="estudiante.jsp">Estudiante <span class="sr-only">(current)</span></a></li>
+            <% }else if(tipoUsuario=="2"){ %> 
+                <li><a class="nav-link" href="profesor.jsp">Profesor <span class="sr-only">(current)</span></a></li>      
             <% } %>
-            <li>
-                 <a class="nav-link" href="cerrarSesion">Cerrar Sesion <span class="sr-only">(current)</span></a> 
-            </li>
-            <%  }%>
-            <% if(usuario==false){ %>
+                <li><a class="nav-link" href="Logout">Cerrar Sesion <span class="sr-only">(current)</span></a> </li>
+            
+                
+            <% }%>
+            <% if(usuario=="false"){ %>
                 <li class="nav-item active"> 
                     <a class="nav-link" href="login.jsp">Login <span class="sr-only">(current)</span></a> 
                 </li>

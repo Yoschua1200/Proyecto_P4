@@ -60,20 +60,6 @@
 
     </div>
     <br>
-<!--<div class="container-fluid">
-<div class="row texto-centrado">
-    <div class="col-lg-2">
-    
-    </div>
-    <div class="col-lg-8">
-	<img src="images/index.jpg" width="100%"" height="100%" alt=""/>
-    </div>
-    <div class="col-lg-2">
-
-    </div>
-</div>
-</div>-->
-
 </body>
 <%@ include file="footer.jsp" %>
 </html>

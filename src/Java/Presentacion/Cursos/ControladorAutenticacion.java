@@ -6,24 +6,30 @@
 package Presentacion.Cursos;
 
 import Datos.EstudianteDatos;
+import Datos.UsuarioDatos;
 import Logica.Estudiante;
+import Logica.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
+import java.util.HashSet;
+import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Danny
  */
 @WebServlet(name = "ControladorAutenticacion", 
-            urlPatterns = {"/RegistroEstudiante", "/Log"})
+            urlPatterns = {"/RegistroEstudiante", "/Log", "/Logout"})
 public class ControladorAutenticacion extends HttpServlet {
-    
+    Usuario usuario = new Usuario();
+    UsuarioDatos usuarioDatos = new UsuarioDatos();
     Estudiante estudiante = new Estudiante();
     EstudianteDatos estudianteDatos = new EstudianteDatos();
     
@@ -40,6 +46,11 @@ public class ControladorAutenticacion extends HttpServlet {
             String correo = request.getParameter("correo");
             request.setAttribute("correo", correo);
             
+            usuario.setCedula(Integer.parseInt(cedula));
+            usuario.setClave("1234");
+            usuario.setTipo(1);
+            usuarioDatos.agregar(usuario);
+            
             estudiante.setCedula(Integer.parseInt(cedula));
             estudiante.setNombre(nombre);
             estudiante.setCorreo(correo);
@@ -48,14 +59,55 @@ public class ControladorAutenticacion extends HttpServlet {
             
             request.getRequestDispatcher("login.jsp").forward(request, response);
             
-        }else if("/Login".equals(request.getServletPath())){
+        }else if("/Log".equals(request.getServletPath())){
             
-            //if(request.getParameter("correo")==)
-            out.println("Error");
-        }
-        
-    }
+            String cedula = request.getParameter("cedula");
+            request.setAttribute("cedula", cedula);
+            String contrasena = request.getParameter("contrasena");
+            request.setAttribute("contrasena", contrasena);
+            
+            usuario = usuarioDatos.validar(Integer.parseInt(cedula),"1234");
+            
+            if (usuario!=null) {
+                
+                if(usuario.getTipo() == 0){
+                    request.getRequestDispatcher("admin.jsp").forward(request, response);
+                }else if (usuario.getTipo() == 1) {
+                    //SE CREA EL ESTUDIANTE CON BASE UNA CONSULTA POR ID YA VALIDADA
+                    estudiante = estudianteDatos.consultarEstudiante(Integer.parseInt(cedula));
+                    String banderaLogin = "1";
+                    request.getSession().setAttribute("banderaLogin", banderaLogin);
+                    String banderaLoginDos = "true";
+                    request.setAttribute("banderaLoginDos", banderaLoginDos);
+                    String tipo = "1";
+                    request.getSession().setAttribute("tipo", tipo);
+                    int cedulaEst = estudiante.getCedula();
+                    request.getSession().setAttribute("cedulaEst", cedulaEst);
+                    String nombre = estudiante.getNombre();
+                    request.getSession().setAttribute("nombre", nombre);
+                    String correo = estudiante.getCorreo();
+                    request.getSession().setAttribute("correo", correo);
+                    String telefono = estudiante.getTelefono();
+                    request.getSession().setAttribute("telefono", telefono);
+                    request.getRequestDispatcher("estudiante.jsp").forward(request, response);
+                }else if(usuario.getTipo() == 2){
+                    
+                    request.getRequestDispatcher("profesor.jsp").forward(request, response);
+                }
+            } else {
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            }
 
+        } else if ("/Logout".equals(request.getServletPath())) {
+            HttpSession session = request.getSession(true);
+            session.invalidate();
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
+    }
+    
+    public void login(HttpServletRequest request){
+     
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

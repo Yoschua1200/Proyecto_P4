@@ -28,6 +28,9 @@
         </div>
         <div class="form-group">
           <label>Teléfono</label>
+          
+           
+          
           <input type="text" class="form-control" name="telefono" placeholder="Teléfono">
         </div>
         <div class="form-group">

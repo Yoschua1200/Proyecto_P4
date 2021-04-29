@@ -71,12 +71,32 @@ Conexion cnx = new Conexion();
 
         }
         return p;
+    }
+    
+    public Estudiante consultarEstudiante(int cedula) {
+       
+        Estudiante est = new Estudiante();
+        String sql = "SELECT * FROM estudiantes WHERE cedula =" + cedula;
+        try {
+            cn = cnx.getConnection();
+            ps = (PreparedStatement) cn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) { 
+           est.setCedula(rs.getInt("cedula"));
+           est.setCorreo(rs.getString("correo"));
+           est.setNombre(rs.getString("nombre"));
+           est.setTelefono(rs.getString("telefono"));
+        
+            }
+        } catch (SQLException e) {
 
+        }
+        return est;
     }
 
     @Override
     public boolean agregar(Persona per) {
-          String sql = "insert into estudiante(cedula, nombre, correo, telefono)"
+          String sql = "insert into estudiantes(cedula, nombre, correo, telefono)"
                         + "values('"+ per.getCedula()+ "','" 
                         + per.getNombre() + "','" 
                         + per.getCorreo()+ "','" 

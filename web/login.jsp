@@ -16,12 +16,12 @@
             <h2 class ="texto-login">Login</h2>
             <form action="Log" method="POST">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Dirección de correo electrónico</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Correo">
+                    <label >Cedula</label>
+                    <input type="text" name="cedula" class="form-control" placeholder="Correo">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Contraseña</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
+                    <input type="password" name="contrasena" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
                 </div>
                 <div class="form-group">
                     <h6>¿No estás registrado? <a class="titulos" href="signin.jsp"> ¡Hazlo ahora! </a></h6>
