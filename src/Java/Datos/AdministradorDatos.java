@@ -72,7 +72,30 @@ Conexion cnx = new Conexion();
         return a;
 
     }
+    
+    
+    public Administrador consultarAdministrador(int id) {
+        Administrador admin = new Administrador();
 
+        String sql = "SELECT * FROM administradores WHERE cedula=" + id;
+        try {
+            cn = cnx.getConnection();
+            ps = (PreparedStatement) cn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                admin.setCedula(rs.getInt("cedula"));
+                admin.setNombre(rs.getString("nombre"));
+                admin.setCorreo(rs.getString("correo"));
+                admin.setTelefono(rs.getString("telefono"));
+
+            }
+        } catch (SQLException e) {
+
+        }
+        return admin;
+
+    }
+            
     @Override
     public boolean agregar(Persona per) {
           String sql = "insert into administradores(cedula, nombre, correo, telefono)"

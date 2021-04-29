@@ -79,6 +79,32 @@ Conexion cnx = new Conexion();
         return p;
 
     }
+    
+    
+    
+        public Profesor consultarProfesor(int cedula) {
+  
+            Profesor pro = new Profesor();
+            String sql = "SELECT * FROM profesores WHERE cedula =" + cedula;
+            try {
+                cn = cnx.getConnection();
+                ps = (PreparedStatement) cn.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    pro.setCedula(rs.getInt("cedula"));
+                    pro.setNombre(rs.getString("nombre"));
+                    pro.setCorreo(rs.getString("correo"));
+                    pro.setTelefono(rs.getString("telefono"));
+                    pro.setEspecialidad1("especialidad1");
+                    pro.setEspecialidad2("especialidad2");
+                    pro.setEspecialidad3("especialidad3");
+                }
+            } catch (SQLException e) {
+
+            }
+        return pro;
+    }
+    
 
     @Override
     public boolean agregar(Persona per) {

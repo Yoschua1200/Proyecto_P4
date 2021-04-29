@@ -5,9 +5,13 @@
  */
 package Presentacion.Cursos;
 
+import Datos.AdministradorDatos;
 import Datos.EstudianteDatos;
+import Datos.ProfesorDatos;
 import Datos.UsuarioDatos;
+import Logica.Administrador;
 import Logica.Estudiante;
+import Logica.Profesor;
 import Logica.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -32,6 +36,10 @@ public class ControladorAutenticacion extends HttpServlet {
     UsuarioDatos usuarioDatos = new UsuarioDatos();
     Estudiante estudiante = new Estudiante();
     EstudianteDatos estudianteDatos = new EstudianteDatos();
+    Profesor profesor = new Profesor();
+    ProfesorDatos profesorDatos = new ProfesorDatos();
+    Administrador administrador = new Administrador();
+    AdministradorDatos administradorDatos = new AdministradorDatos();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -71,6 +79,22 @@ public class ControladorAutenticacion extends HttpServlet {
             if (usuario!=null) {
                 
                 if(usuario.getTipo() == 0){
+                    administrador = administradorDatos.consultarAdministrador(Integer.parseInt(cedula));
+                    String banderaLogin = "1";
+                    request.getSession().setAttribute("banderaLogin", banderaLogin);
+                    String banderaLoginDos = "true";
+                    request.setAttribute("banderaLoginDos", banderaLoginDos);
+                    String tipo = "0";
+                    request.getSession().setAttribute("tipo", tipo);
+                    int cedulaAdmin = administrador.getCedula();
+                    request.getSession().setAttribute("cedulaAdmin", cedulaAdmin);
+                    String nombre = administrador.getNombre();
+                    request.getSession().setAttribute("nombre", nombre);
+                    String correo = administrador.getCorreo();
+                    request.getSession().setAttribute("correo", correo);
+                    String telefono = administrador.getTelefono();
+                    request.getSession().setAttribute("telefono", telefono);
+                    
                     request.getRequestDispatcher("admin.jsp").forward(request, response);
                 }else if (usuario.getTipo() == 1) {
                     //SE CREA EL ESTUDIANTE CON BASE UNA CONSULTA POR ID YA VALIDADA
@@ -91,8 +115,33 @@ public class ControladorAutenticacion extends HttpServlet {
                     request.getSession().setAttribute("telefono", telefono);
                     request.getRequestDispatcher("estudiante.jsp").forward(request, response);
                 }else if(usuario.getTipo() == 2){
+                    profesor = profesorDatos.consultarProfesor(Integer.parseInt(cedula));
+                    String banderaLogin = "1";
+                    request.getSession().setAttribute("banderaLogin", banderaLogin);
+                    String banderaLoginDos = "true";
+                    request.setAttribute("banderaLoginDos", banderaLoginDos);
+                    String tipo = "2";
+                    request.getSession().setAttribute("tipo", tipo);
+                    
+                    int cedulaPro = profesor.getCedula();
+                    request.getSession().setAttribute("cedulaPro", cedulaPro);
+                    String nombre = profesor.getNombre();
+                    request.getSession().setAttribute("nombre", nombre);
+                    String correo = profesor.getCorreo();
+                    request.getSession().setAttribute("correo", correo);
+                    String telefono = profesor.getTelefono();
+                    request.getSession().setAttribute("telefono", telefono);
+                    
+                    String especialidad1 = profesor.getEspecialidad1();
+                    request.getSession().setAttribute("especialidad1", especialidad1);
+                    String especialidad2 = profesor.getEspecialidad2();
+                    request.getSession().setAttribute("especialidad2", especialidad2);
+                    String especialidad3 = profesor.getEspecialidad3();
+                    request.getSession().setAttribute("especialidad3", especialidad3);
                     
                     request.getRequestDispatcher("profesor.jsp").forward(request, response);
+                }else{
+                     request.getRequestDispatcher("error.jsp").forward(request, response);
                 }
             } else {
                 request.getRequestDispatcher("login.jsp").forward(request, response);
@@ -101,7 +150,7 @@ public class ControladorAutenticacion extends HttpServlet {
         } else if ("/Logout".equals(request.getServletPath())) {
             HttpSession session = request.getSession(true);
             session.invalidate();
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
     

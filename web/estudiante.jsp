@@ -6,11 +6,20 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<body style="padding-top: 70px; padding-bottom: 70px;">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CursosLibres.com</title>
+        <link rel="shortcut icon" href="images/logo.ico" type="">
+    </head>
+    <body style="padding-top: 70px; padding-bottom: 70px;">
     
 <%@ include file="header.jsp" %>
 <% String banderaLogin = (String)request.getSession().getAttribute("banderaLogin"); 
-    if(banderaLogin == "1"){
+    tipoUsuario = (String) request.getSession().getAttribute("tipo");
+    
+    if(banderaLogin == "1"  && tipoUsuario=="1"){
 %>
 <div class="container"> 
   <div class="row">

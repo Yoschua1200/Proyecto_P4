@@ -42,6 +42,7 @@
                             c = iter.next();
                 %>
                 <div class="carousel-item"> 
+                    <h3 class="parpadea">¡EN OFERTA!</h3>
                     <img class="d-block mx-auto" src="images/<%= c.getLogo()%>" alt="First slide">
                     <div class="carousel-caption">
                         <span class="titulo_carusel"><%= c.getNombre()%></span>

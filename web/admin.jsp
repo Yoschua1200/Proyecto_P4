@@ -12,9 +12,22 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CursosLibres.com</title>
+        <link rel="shortcut icon" href="images/logo.ico" type="">
+    </head>
     <body style="padding-top: 70px; padding-bottom: 70px;">
 
         <%@ include file="header.jsp" %>
+        <% String banderaLogin = (String) request.getSession().getAttribute("banderaLogin");
+            tipoUsuario = (String) request.getSession().getAttribute("tipo");
+
+            if (banderaLogin == "1" && tipoUsuario == "0") {
+        %> 
+
         <div class="container"> 
             <div class="row">
                 <div class="col-lg-5">
@@ -25,9 +38,10 @@
                         </div>
 
                         <div class="col-lg-8"> 
-                            <h6>Nombre: Qwerty</h6>
-                            <h6>Correo: qwerty@protonmail.com</h6>
-                            <h6>Tel: 3773244</h6>
+                            <h6>Nombre: ${nombre}</h6>
+                            <h6>Cédula: ${cedulaAdmin}</h6>
+                            <h6>Correo: ${correo}</h6>
+                            <h6>Tel: ${telefono}</h6>
                         </div>
                     </div>
 
@@ -82,7 +96,7 @@
                                         <button type="submit" class="btn btn-primary">Registrar curso</button>
                                     </form>
 
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -100,68 +114,67 @@
                             </div>
                             <div id="colapsarAcordionDos" class="collapse" role="tabpanel" aria-labelledby="tituloDos" data-parent="#accordion2">
                                 <div class="card-body">
-                                     <div class="container">
-            
+                                    <div class="container">
 
 
-            <%
-               
-                    CursoDatos cursoD = new CursoDatos();
-                    List<Curso> list = cursoD.listar();
-                    Iterator<Curso> iter = list.iterator();
-                    Curso c = null;
-                    while (iter.hasNext()) {
-                        c = iter.next();
-            %>
-            <div class="row">
-                <div class="col-lg-2"></div>
-                <div class="col-lg-10">
 
-                    <div class="container">
-                        <div class="row" border="1">
-                          
-                            <div class="col-lg-12">
-                                <table width="100%" >
-                                    <tbody>
-                                        <br>
-                                        <tr>
-                                            <h5>Código: <%= c.getCodigo()%></h5>
-                                        </tr>
-                                        <tr>
-                                            <h5>Nombre: <%= c.getNombre()%> </h5>
-                                        </tr>
-                                        <tr>
-                                            <h5>Temática: <%= c.getTematica()%> </h5>
-                                        </tr>
-                                        <tr>
-                                            <h5>Costo: <%= c.getCosto()%></h5>
-                                        </tr>
-                                        <tr>
-                                            <h5>Estado: <%= c.getStatus()%></h5>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <form class="form-inline my-2 my-lg-0" action="EliminarCurso" method="POST">
-                                                <div class="form-group">
-   
-                                                    <input type = "hidden" name="codigoElim" class="form-control" value="<%= c.getCodigo() %>" placeholder="Eliminar">
+                                        <%
+                                            CursoDatos cursoD = new CursoDatos();
+                                            List<Curso> list = cursoD.listar();
+                                            Iterator<Curso> iter = list.iterator();
+                                            Curso c = null;
+                                            while (iter.hasNext()) {
+                                                c = iter.next();
+                                        %>
+                                        <div class="row">
+                                            <div class="col-lg-2"></div>
+                                            <div class="col-lg-10">
+
+                                                <div class="container">
+                                                    <div class="row" border="1">
+
+                                                        <div class="col-lg-12">
+                                                            <table width="100%" >
+                                                                <tbody>
+                                                                <br>
+                                                                <tr>
+                                                                <h5>Código: <%= c.getCodigo()%></h5>
+                                                                </tr>
+                                                                <tr>
+                                                                <h5>Nombre: <%= c.getNombre()%> </h5>
+                                                                </tr>
+                                                                <tr>
+                                                                <h5>Temática: <%= c.getTematica()%> </h5>
+                                                                </tr>
+                                                                <tr>
+                                                                <h5>Costo: <%= c.getCosto()%></h5>
+                                                                </tr>
+                                                                <tr>
+                                                                <h5>Estado: <%= c.getStatus()%></h5>
+                                                                </tr>
+
+                                                                <tr>
+                                                                <form class="form-inline my-2 my-lg-0" action="EliminarCurso" method="POST">
+                                                                    <div class="form-group">
+
+                                                                        <input type = "hidden" name="codigoElim" class="form-control" value="<%= c.getCodigo()%>" placeholder="Eliminar">
+                                                                    </div>
+
+                                                                    <button type="submit" class="btn btn-primary btn-lg">Eliminar</button>
+                                                                </form>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                
-                                                <button type="submit" class="btn btn-primary btn-lg">Eliminar</button>
-                                            </form>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br>
-            <%} %>
-        </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <%} %>
+                                    </div>
 
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -184,13 +197,13 @@
                             <div id="colapsarAcordionTres" class="collapse" role="tabpanel" aria-labelledby="tituloTres" data-parent="#accordion3">
                                 <div class="card-body">
                                     <form class="form-inline my-2 my-lg-0" action="ConsultarCurso" method="POST">
-                                                <div class="form-group">
-   
-                                                    <input type = "text" name="codigoConsul" class="form-control" placeholder="Código de curso">
-                                                </div>
-                                                
-                                                <button type="submit" class="btn btn-primary btn-lg"> Consultar</button>
-                                            </form>
+                                        <div class="form-group">
+
+                                            <input type = "text" name="codigoConsul" class="form-control" placeholder="Código de curso">
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary btn-lg"> Consultar</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -215,10 +228,10 @@
             </div>
         </div>
         <br> 
-        
-        
+
+
         <!---GRUPOS-->
-        
+
         <div class="container">
             <h2 class="texto-centrado">Gestión de grupos</h2>
             <br>
@@ -309,10 +322,10 @@
                 </div>
             </div>
         </div>
-        
+
         <br>
-         <!---PROFES-->
-        
+        <!---PROFES-->
+
         <div class="container">
             <h2 class="texto-centrado">Gestión de profesores</h2>
             <br>
@@ -422,7 +435,11 @@
                 </div>
             </div>
         </div>
-        
+
     </body>
+    <%} else {
+            response.sendRedirect("error.jsp");
+        }%>
     <%@ include file="footer.jsp" %>
+
 </html>

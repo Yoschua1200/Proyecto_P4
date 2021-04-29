@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 //CONTROLADOR log
 @WebServlet(name = "ServletRegistroCurso", 
-                urlPatterns = {"/RegistroCurso", "/EditarCurso", 
+                urlPatterns = {"/RegistroCurso", "/EditarCurso", "/BuscarCurso",
                                 "/VerCurso", "/EliminarCurso", "/ConsultarCurso", "/Matricular", "/Index"})
 public class ControladorCurso extends HttpServlet {
 
@@ -58,7 +58,7 @@ public class ControladorCurso extends HttpServlet {
             flag = "ver";
             request.setAttribute("flag", flag);
             request.getRequestDispatcher("Pruebas.jsp").forward(request, response);
-        }else if("/Consultar".equals(request.getServletPath())) {
+        }else if("/BuscarCurso".equals(request.getServletPath())) {
             flag = "consulta";
             request.setAttribute("flag", flag);
             String nombre = request.getParameter("nombre");
