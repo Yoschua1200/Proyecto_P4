@@ -100,7 +100,7 @@ Conexion cnx = new Conexion();
                
             }
         } catch (SQLException e) {
-
+          
         }
         return cur;
 
@@ -151,8 +151,8 @@ Conexion cnx = new Conexion();
     }
 
    
-    public boolean eliminar(String cod) {
-        String sql = "delete from cursos where cedula="+cod;
+    public boolean eliminar(int cod) {
+        String sql = "delete from cursos where codigo="+cod;
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);
@@ -162,6 +162,7 @@ Conexion cnx = new Conexion();
         }
         return true;
     }
+
     
     
     

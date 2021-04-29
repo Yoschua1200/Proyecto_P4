@@ -14,32 +14,42 @@ import java.util.List;
  */
 public class Profesor extends Persona{
 
-
-    public List<String> getEspecialidades() {
-        return especialidades;
+    public String getEspecialidad1() {
+        return especialidad1;
     }
+
+    public void setEspecialidad1(String especialidad1) {
+        this.especialidad1 = especialidad1;
+    }
+
+    public String getEspecialidad2() {
+        return especialidad2;
+    }
+
+    public void setEspecialidad2(String especialidad2) {
+        this.especialidad2 = especialidad2;
+    }
+
+    public String getEspecialidad3() {
+        return especialidad3;
+    }
+
+    public void setEspecialidad3(String especialidad3) {
+        this.especialidad3 = especialidad3;
+    }
+private String especialidad1;
+private String especialidad2;
+private String especialidad3;
 
     public Profesor(String nombre, int cedula, String correo, String telefono, Usuario usuario) {
         super(nombre, cedula, correo, telefono, usuario);
     }
-   private List<String> especialidades = new ArrayList<String>();
+  
 
     public Profesor() {
      super("",0,"","",null);
     }
   
-
-public void AgregarEspecialidad(String especialidad){
-    especialidades.add(especialidad);
-}
-public boolean EliminarEspecialidad(String especialidad){
-    for(int i = 0; i < especialidades.size(); i++)
-        if(especialidades.get(i).equalsIgnoreCase(especialidad)){
-            especialidades.remove(i);
-            return true;
-        }
-    return false;
-}
 
 
 
