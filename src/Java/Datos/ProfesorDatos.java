@@ -23,8 +23,9 @@ Conexion cnx = new Conexion();
        Connection cn;
        PreparedStatement ps;
        ResultSet rs;
-      
-       
+
+   
+
     @Override
     public List listar() {
         
@@ -40,9 +41,9 @@ Conexion cnx = new Conexion();
            p.setCorreo(rs.getString("correo"));
            p.setNombre(rs.getString("nombre"));
            p.setTelefono(rs.getString("telefono"));
-           p.AgregarEspecialidad(rs.getString("especialiad1"));
-           p.AgregarEspecialidad(rs.getString("especialiad2"));
-           p.AgregarEspecialidad(rs.getString("especialiad3"));
+           p.setEspecialidad1(rs.getString("especialiad1"));
+           p.setEspecialidad2(rs.getString("especialiad2"));
+           p.setEspecialidad3(rs.getString("especialiad3"));
            lista.add(p);
        }
        
@@ -57,7 +58,7 @@ Conexion cnx = new Conexion();
     public Persona consultar(int id) {
        
     Profesor p = new Profesor();
-        String sql = "SELECT * FROM profesores WHERE cedula =" + id;
+        String sql = "SELECT * FROM profesores WHERE cedula=" + id;
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);
@@ -67,9 +68,9 @@ Conexion cnx = new Conexion();
            p.setCorreo(rs.getString("correo"));
            p.setNombre(rs.getString("nombre"));
            p.setTelefono(rs.getString("telefono"));
-           p.AgregarEspecialidad(rs.getString("especialiad1"));
-           p.AgregarEspecialidad(rs.getString("especialiad2"));
-           p.AgregarEspecialidad(rs.getString("especialiad3"));
+           p.setEspecialidad1(rs.getString("especialiad1"));
+           p.setEspecialidad2(rs.getString("especialiad2"));
+           p.setEspecialidad3(rs.getString("especialiad3"));
             }
         } catch (SQLException e) {
 
@@ -83,10 +84,10 @@ Conexion cnx = new Conexion();
     public boolean agregar(Persona per) {
         Profesor p = (Profesor) per;
 
-          String sql = "insert into profesores(cedula, nombre, correo electronico, telefono, especialidad1, especialidad2, especialidad3)"
-                + "values('"+ p.getCedula()+ "','"+ p.getNombre() + "','" 
+          String sql = "insert into profesores(cedula, nombre, correo, telefono, especialidad1, especialidad2, especialidad3)"
+                + "values("+ p.getCedula()+ ",'"+ p.getNombre() + "','" 
                 + p.getCorreo()+ "','" + p.getTelefono()
-                + "','" + p.getTelefono()+"','" + p.getEspecialidades().get(0) + p.getEspecialidades().get(1) + p.getEspecialidades().get(2)+"')";
+                + "','" + p.getEspecialidad1()+"','" + p.getEspecialidad2()+"','" + p.getEspecialidad3()+"')";
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);

@@ -74,9 +74,8 @@ Conexion cnx = new Conexion();
 
     }
     public boolean agregar(Grupo g) {
-        String sql = "insert into grupos(id,cedula_profesor,codigo_curso,horario)"
-                + "values('" + g.getId() + "','" 
-                + g.getProfesor().getCedula() + "','" + g.getCurso().getCodigo()+"')";
+        String sql = "insert into grupos(cedula_profesor,codigo_curso,horario)"
+                + "values(" + g.getProfesor().getCedula() + "," + g.getCurso().getCodigo()+",'"+g.getHora()+"')"; 
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);

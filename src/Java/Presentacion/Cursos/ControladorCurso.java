@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 //CONTROLADOR log
 @WebServlet(name = "ServletRegistroCurso", 
                 urlPatterns = {"/RegistroCurso", "/EditarCurso", 
-                                "/VerCurso", "/Eliminar", "/Consultar", "/Matricular", "/Index"})
+                                "/VerCurso", "/EliminarCurso", "/ConsultarCurso", "/Matricular", "/Index"})
 public class ControladorCurso extends HttpServlet {
 
     Curso curso = new Curso();
@@ -73,6 +73,19 @@ public class ControladorCurso extends HttpServlet {
             ///cursosdatos.consultar(nombre);
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
+        else if("/EliminarCurso".equals(request.getServletPath())) {
+           // cursosdatos.eliminar((int) request.getAttribute("codigoElim"));
+            cursosdatos.eliminar(Integer.parseInt(request.getParameter("codigoElim")));
+               request.getRequestDispatcher("admin.jsp").forward(request, response);   
+        }
+         else if("/ConsultarCurso".equals(request.getServletPath())){
+             String CodCurso = request.getParameter("codigoConsul");
+             request.setAttribute("Consulta", CodCurso);
+              request.getRequestDispatcher("admin.jsp").forward(request, response); 
+              
+         }
+         
+        
     }
     
     @Override
