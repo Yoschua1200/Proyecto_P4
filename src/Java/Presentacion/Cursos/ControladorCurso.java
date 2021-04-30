@@ -67,10 +67,6 @@ public class ControladorCurso extends HttpServlet {
             request.getRequestDispatcher("busqueda.jsp").forward(request, response);
         }else if("/Index".equals(request.getServletPath())) {
             flag = "index";
-            //request.setAttribute("flag", flag);
-            //String oferta = "oferta";
-            //request.setAttribute("oferta", oferta);
-            ///cursosdatos.consultar(nombre);
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
         else if("/EliminarCurso".equals(request.getServletPath())) {
@@ -104,12 +100,5 @@ public class ControladorCurso extends HttpServlet {
         return "Short description";
     }// </editor-fold>
     
-    /*private String getRestriccion(String placa){
-        
-        switch(placa.charAt(placa.length()-1)){
-            case '1': case '2': return "Lunes xD";
-            case '3': case '4': return "Martes xD";
-            default: return "Sin restriccion";
-        }
-    }*/
+  
 }

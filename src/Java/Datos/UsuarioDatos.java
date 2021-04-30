@@ -116,7 +116,7 @@ Conexion cnx = new Conexion();
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);
             ps.setInt(1, ced);
-            ps.setString(2, "1234");
+            ps.setString(2, pass);
             rs = ps.executeQuery();
             while (rs.next()) {
                 usuario.setCedula(rs.getInt("cedula"));

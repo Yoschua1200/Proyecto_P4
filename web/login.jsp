@@ -24,7 +24,7 @@
             <form action="Log" method="POST">
                 <div class="form-group">
                     <label >Cedula</label>
-                    <input type="text" name="cedula" class="form-control" placeholder="Correo">
+                    <input type="text" name="cedula" class="form-control" placeholder="Cédula">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Contraseña</label>
