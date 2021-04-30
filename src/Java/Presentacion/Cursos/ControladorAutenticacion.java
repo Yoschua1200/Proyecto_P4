@@ -74,7 +74,7 @@ public class ControladorAutenticacion extends HttpServlet {
             String contrasena = request.getParameter("contrasena");
             request.setAttribute("contrasena", contrasena);
             
-            usuario = usuarioDatos.validar(Integer.parseInt(cedula),"1234");
+            usuario = usuarioDatos.validar(Integer.parseInt(cedula),contrasena);
             
             if (usuario!=null) {
                 
