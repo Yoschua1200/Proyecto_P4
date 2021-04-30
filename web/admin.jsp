@@ -28,7 +28,7 @@
     <body style="padding-top: 70px; padding-bottom: 70px;">
 
         <%@ include file="header.jsp" %>
-        <% String banderaConsultar = (String) request.getAttribute("Consulta"); %>
+        <% String banderaConsultarCurso = (String) request.getAttribute("Consulta"); %>
         <% String banderaLogin = (String) request.getSession().getAttribute("banderaLogin");
             tipoUsuario = (String) request.getSession().getAttribute("tipo");
 
@@ -211,8 +211,8 @@
 
                                         <button type="submit" class="btn btn-primary btn-lg"> Consultar</button>
                                     </form>
-                                   <%if(banderaConsultar!=null){   
-                                       Curso c2 = cursoD.consultarCurso(Integer.parseInt(banderaConsultar));
+                                   <%if(banderaConsultarCurso!=null){   
+                                       Curso c2 = cursoD.consultarCurso(Integer.parseInt(banderaConsultarCurso));
                                    %>
                                     <div class="container">
                                                     <div class="row" border="1">

@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Boris Monge
  */
-@WebServlet(name = "ControladorGrupo", urlPatterns = {"/RegistroGrupo", "/EliminarGrupo"})
+@WebServlet(name = "ControladorGrupo", urlPatterns = {"/RegistroGrupo", "/EliminarGrupo", "/ConsultarGrupo"})
 public class ControladorGrupo extends HttpServlet {
 ModeloGrupo mg = new ModeloGrupo();
     /**
@@ -52,6 +52,11 @@ ModeloGrupo mg = new ModeloGrupo();
           else if ("/EliminarGrupo".equals(request.getServletPath())) {    
                    request.getRequestDispatcher("admin.jsp").forward(request, response);
               }
+          else if ("/ConsultarGrupo".equals(request.getServletPath())) {    
+              String CodCurso = request.getParameter("codigoConsul");
+             request.setAttribute("Consulta", CodCurso);
+             request.getRequestDispatcher("admin.jsp").forward(request, response); 
+            }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
