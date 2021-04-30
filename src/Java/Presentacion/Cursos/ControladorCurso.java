@@ -81,7 +81,7 @@ public class ControladorCurso extends HttpServlet {
          else if("/ConsultarCurso".equals(request.getServletPath())){
              String CodCurso = request.getParameter("codigoConsul");
              request.setAttribute("Consulta", CodCurso);
-              request.getRequestDispatcher("admin.jsp").forward(request, response); 
+             request.getRequestDispatcher("admin.jsp").forward(request, response); 
               
          }
          

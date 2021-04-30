@@ -4,6 +4,12 @@
     Author     : Danny
 --%>
 
+<%@page import="Logica.Profesor"%>
+<%@page import="Logica.Profesor"%>
+<%@page import="Datos.ProfesorDatos"%>
+<%@page import="java.lang.String"%>
+<%@page import="Logica.Grupo"%>
+<%@page import="Datos.GrupoDatos"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page import="Logica.Curso"%>
@@ -22,6 +28,7 @@
     <body style="padding-top: 70px; padding-bottom: 70px;">
 
         <%@ include file="header.jsp" %>
+        <% String banderaConsultar = (String) request.getAttribute("Consulta"); %>
         <% String banderaLogin = (String) request.getSession().getAttribute("banderaLogin");
             tipoUsuario = (String) request.getSession().getAttribute("tipo");
 
@@ -204,6 +211,37 @@
 
                                         <button type="submit" class="btn btn-primary btn-lg"> Consultar</button>
                                     </form>
+                                   <%if(banderaConsultar!=null){   
+                                       Curso c2 = cursoD.consultarCurso(Integer.parseInt(banderaConsultar));
+                                   %>
+                                    <div class="container">
+                                                    <div class="row" border="1">
+                                                        <div class="col-lg-12">
+                                                            <table width="100%" >
+                                                                <tbody>
+                                                                <br>
+                                                                <tr>
+                                                                <h5>Código: <%= c2.getCodigo()%></h5>
+                                                                </tr>
+                                                                <tr>
+                                                                <h5>Nombre: <%= c2.getNombre()%> </h5>
+                                                                </tr>
+                                                                <tr>
+                                                                <h5>Temática: <%= c2.getTematica()%> </h5>
+                                                                </tr>
+                                                                <tr>
+                                                                <h5>Costo: <%= c2.getCosto()%></h5>
+                                                                </tr>
+                                                                <tr>
+                                                                <h5>Estado: <%= c2.getStatus()%></h5>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                   <%}%>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -279,7 +317,71 @@
                                 </h5>
                             </div>
                             <div id="colapsarAcordionDosGrupo" class="collapse" role="tabpanel" aria-labelledby="tituloDosGrupo" data-parent="#accordion2Grupo">
-                                <div class="card-body">GRUPOS</div>
+                                <div class="card-body">
+                                     <div class="container">
+
+
+
+                                        <%
+                                           GrupoDatos grupoD = new GrupoDatos();
+                                               List<Grupo> list2 = grupoD.listar();
+                                               Iterator<Grupo> iter2 = list2.iterator();
+                                               Grupo g = null;
+                                               while (iter2.hasNext()) {
+                                                   g = iter2.next();
+
+                                        %>
+                                        <div class="row">
+                                            <div class="col-lg-2"></div>
+                                            <div class="col-lg-10">
+
+                                                <div class="container">
+                                                    <div class="row" border="1">
+
+                                                        <div class="col-lg-12">
+                                                            <table width="100%" >
+                                                                <tbody>
+                                                                <br>
+                                                                <tr>
+                                                                <h5>ID: <%=g.getId()%></h5>
+                                                                </tr>
+                                                                <tr>
+                                                                <h5>Curso: <%= g.getCurso().getNombre()%> </h5>
+                                                                </tr>
+                                                                <tr>
+                                                                <h5>Nombre de profesor a cargo: <%= g.getProfesor().getNombre()%> </h5>
+                                                                </tr>
+                                                                <tr>
+                                                                <h5>Horario <%= g.getHora()%></h5>
+                                                                </tr>
+
+                                                                <tr>
+                                                                <form class="form-inline my-2 my-lg-0" action="EliminarGrupo" method="POST">
+                                                                    <div class="form-group">
+
+                                                                        <input type = "hidden" name="IdElim" class="form-control" value="<%= g.getId()%>" placeholder="Eliminar">
+                                                                    </div>
+
+                                                                    <button type="submit" class="btn btn-primary btn-lg">Eliminar</button>
+                                                                </form>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <%} %>
+                                    </div>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -392,7 +494,75 @@
                                 </h5>
                             </div>
                             <div id="colapsarAcordionDosProfesor" class="collapse" role="tabpanel" aria-labelledby="tituloDosProfesor" data-parent="#accordion2Profesor">
-                                <div class="card-body">PROFESORES</div>
+                                <div class="card-body">
+                                    <div class="container">
+
+
+
+                                        <%
+                                          ProfesorDatos profD = new ProfesorDatos();
+                                               List<Profesor> list3 = profD.listar();
+                                               Iterator<Profesor> iter3 = list3.iterator();
+                                               Profesor p = null;
+                                               while (iter3.hasNext()) {
+                                                   p = iter3.next();
+
+                                        %>
+                                        <div class="row">
+                                            <div class="col-lg-2"></div>
+                                            <div class="col-lg-10">
+
+                                                <div class="container">
+                                                    <div class="row" border="1">
+
+                                                        <div class="col-lg-12">
+                                                           <table width="100%" >
+                                                                <tbody>
+                                                                <br>
+                                                                <tr>
+                                                                <h5>Cédula: <%=p.getCedula()%></h5>
+                                                                </tr>
+                                                                <tr>
+                                                                <h5>Nombre: <%= p.getNombre()%> </h5>
+                                                                </tr>
+                                                                <tr>
+                                                                <h5>Correo eléctronico: <%= p.getCorreo()%> </h5>
+                                                                </tr>
+                                                                <tr>
+                                                                <h5>Teléfono <%= p.getTelefono()%></h5>
+                                                                </tr>
+                                                                <tr>
+                                                                <h5>Especialidad 1: <%=p.getEspecialidad1()%></h5>
+                                                                </tr>
+                                                                <tr>
+                                                                <h5>Especialidad 2: <%=p.getEspecialidad2()%></h5>
+                                                                </tr>
+                                                                <tr>
+                                                                <h5>Especialidad 3: <%=p.getEspecialidad3()%></h5>
+                                                                </tr>
+                                                                <tr>
+                                                                <form class="form-inline my-2 my-lg-0" action="EliminarProfe" method="POST">
+                                                                    <div class="form-group">
+
+                                                                        <input type = "hidden" name="IdElim" class="form-control" value="<%= p.getCedula()%>" placeholder="Eliminar">
+                                                                    </div>
+
+                                                                    <button type="submit" class="btn btn-primary btn-lg">Eliminar</button>
+                                                                </form>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <%} %>
+                                    </div>
+                                    
+                                    
+                                   </div>
                             </div>
                         </div>
                     </div>

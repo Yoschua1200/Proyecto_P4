@@ -5,8 +5,6 @@
  */
 package Logica;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -48,6 +46,9 @@ private String especialidad3;
 
     public Profesor() {
      super("",0,"","",null);
+     this.especialidad1 = "";
+     this.especialidad2 = "";
+     this.especialidad3 = "";
     }
   
 

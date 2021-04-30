@@ -29,7 +29,7 @@ Conexion cnx = new Conexion();
     @Override
     public List listar() {
         
-       ArrayList<Persona>lista = new ArrayList<>();
+       ArrayList<Profesor>lista = new ArrayList<>();
        String sql = "select * from profesores";
        try{
        cn = cnx.getConnection();
@@ -41,9 +41,9 @@ Conexion cnx = new Conexion();
            p.setCorreo(rs.getString("correo"));
            p.setNombre(rs.getString("nombre"));
            p.setTelefono(rs.getString("telefono"));
-           p.setEspecialidad1(rs.getString("especialiad1"));
-           p.setEspecialidad2(rs.getString("especialiad2"));
-           p.setEspecialidad3(rs.getString("especialiad3"));
+           p.setEspecialidad1(rs.getString("especialidad1"));
+           p.setEspecialidad2(rs.getString("especialidad2"));
+           p.setEspecialidad3(rs.getString("especialidad3"));
            lista.add(p);
        }
        
