@@ -5,7 +5,7 @@
 --%>
 <%
     String usuario="false";
-    String tipoUsuario = "3";
+    String tipoUsuario = "0";
         if (request.getSession().getAttribute("banderaLogin") != null) {
             usuario=(String) request.getSession().getAttribute("banderaLoginDos");
 
@@ -42,7 +42,7 @@
         <ul class="navbar-nav ml-auto">
             
             <% if(usuario!="false"){ 
-                if(tipoUsuario=="0"){
+                if(tipoUsuario=="3"){
             %>  <li><a class="nav-link" href="admin.jsp">Administración <span class="sr-only">(current)</span></a></li>    
             <% }else if(tipoUsuario=="1"){ %>
                 <li><a class="nav-link" href="estudiante.jsp">Estudiante <span class="sr-only">(current)</span></a></li>

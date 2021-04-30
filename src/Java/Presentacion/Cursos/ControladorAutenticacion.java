@@ -78,13 +78,13 @@ public class ControladorAutenticacion extends HttpServlet {
             
             if (usuario!=null) {
                 
-                if(usuario.getTipo() == 0){
+                if(usuario.getTipo() == 3){
                     administrador = administradorDatos.consultarAdministrador(Integer.parseInt(cedula));
                     String banderaLogin = "1";
                     request.getSession().setAttribute("banderaLogin", banderaLogin);
                     String banderaLoginDos = "true";
                     request.setAttribute("banderaLoginDos", banderaLoginDos);
-                    String tipo = "0";
+                    String tipo = "3";
                     request.getSession().setAttribute("tipo", tipo);
                     int cedulaAdmin = administrador.getCedula();
                     request.getSession().setAttribute("cedulaAdmin", cedulaAdmin);

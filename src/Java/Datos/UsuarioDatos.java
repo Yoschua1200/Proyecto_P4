@@ -111,7 +111,6 @@ Conexion cnx = new Conexion();
     public Usuario validar(int ced, String pass){
         String sql = "select * from usuarios where cedula=? and contrasena=?";
 
-        int r = 0;
         try {
             Usuario usuario = new Usuario();
             cn = cnx.getConnection();
@@ -119,9 +118,7 @@ Conexion cnx = new Conexion();
             ps.setInt(1, ced);
             ps.setString(2, "1234");
             rs = ps.executeQuery();
-
             while (rs.next()) {
-                r = r + 1;
                 usuario.setCedula(rs.getInt("cedula"));
                 usuario.setClave(rs.getString("contrasena"));
                 usuario.setTipo(rs.getInt("tipo"));

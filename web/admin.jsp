@@ -25,7 +25,7 @@
         <% String banderaLogin = (String) request.getSession().getAttribute("banderaLogin");
             tipoUsuario = (String) request.getSession().getAttribute("tipo");
 
-            if (banderaLogin == "1" && tipoUsuario == "0") {
+            if (banderaLogin == "1" && tipoUsuario == "3") {
         %> 
 
         <div class="container"> 
