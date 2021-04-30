@@ -80,11 +80,24 @@ public class ControladorCurso extends HttpServlet {
         }
          else if("/ConsultarCurso".equals(request.getServletPath())){
              String CodCurso = request.getParameter("codigoConsul");
-             request.setAttribute("Consulta", CodCurso);
+             request.setAttribute("ConsultaCurso", CodCurso);
              request.getRequestDispatcher("admin.jsp").forward(request, response); 
               
          }
-         
+         else if("/EditarCurso".equals(request.getServletPath())){
+             boolean flag2;
+             String CodCurso = request.getParameter("codigoActualizar");
+             Curso c = cursosdatos.consultarCurso(Integer.parseInt(CodCurso));
+             if(c.getStatus().equals("Oferta")){
+                 flag2 = true;
+             }
+             else{
+                 flag2 = false;
+             }
+             cursosdatos.editarStatus(Integer.parseInt(CodCurso),flag2);
+             request.getRequestDispatcher("admin.jsp").forward(request, response); 
+              
+         }
         
     }
     

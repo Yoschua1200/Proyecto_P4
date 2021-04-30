@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Boris Monge
  */
-@WebServlet(name = "ControladorGrupo", urlPatterns = {"/RegistroGrupo", "/EliminarGrupo", "/ConsultarGrupo"})
+@WebServlet(name = "ControladorGrupo", urlPatterns = {"/RegistroGrupo", "/EliminarGrupo", "/ConsultarGrupo", "/EditarGrupo"})
 public class ControladorGrupo extends HttpServlet {
 ModeloGrupo mg = new ModeloGrupo();
     /**
@@ -49,12 +49,20 @@ ModeloGrupo mg = new ModeloGrupo();
             mg.getGrupd().agregar(mg.getGrupo());
             request.getRequestDispatcher("admin.jsp").forward(request, response);
           }
-          else if ("/EliminarGrupo".equals(request.getServletPath())) {    
+          else if ("/EliminarGrupo".equals(request.getServletPath())) { 
+              mg.getGrupd().eliminar(Integer.parseInt(request.getParameter("IdElim")));
                    request.getRequestDispatcher("admin.jsp").forward(request, response);
               }
           else if ("/ConsultarGrupo".equals(request.getServletPath())) {    
               String CodCurso = request.getParameter("codigoConsul");
-             request.setAttribute("Consulta", CodCurso);
+             request.setAttribute("ConsultaGrupo", CodCurso);
+             request.getRequestDispatcher("admin.jsp").forward(request, response); 
+            }
+          else if ("/EditarGrupo".equals(request.getServletPath())) {    
+            String cedProf = request.getParameter("EditGrupo");
+             String CodGrupo = request.getParameter("IdGrupo");
+             Profesor p = (Profesor) mg.getProfd().consultar(Integer.parseInt(cedProf));
+             mg.getGrupd().editarGrupo(Integer.parseInt(CodGrupo), p);
              request.getRequestDispatcher("admin.jsp").forward(request, response); 
             }
     }

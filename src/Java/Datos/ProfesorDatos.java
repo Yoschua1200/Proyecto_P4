@@ -68,9 +68,9 @@ Conexion cnx = new Conexion();
            p.setCorreo(rs.getString("correo"));
            p.setNombre(rs.getString("nombre"));
            p.setTelefono(rs.getString("telefono"));
-           p.setEspecialidad1(rs.getString("especialiad1"));
-           p.setEspecialidad2(rs.getString("especialiad2"));
-           p.setEspecialidad3(rs.getString("especialiad3"));
+           p.setEspecialidad1(rs.getString("especialidad1"));
+           p.setEspecialidad2(rs.getString("especialidad2"));
+           p.setEspecialidad3(rs.getString("especialidad3"));
             }
         } catch (SQLException e) {
 
@@ -95,9 +95,9 @@ Conexion cnx = new Conexion();
                     pro.setNombre(rs.getString("nombre"));
                     pro.setCorreo(rs.getString("correo"));
                     pro.setTelefono(rs.getString("telefono"));
-                    pro.setEspecialidad1("especialidad1");
-                    pro.setEspecialidad2("especialidad2");
-                    pro.setEspecialidad3("especialidad3");
+                    pro.setEspecialidad1(rs.getString("especialidad1"));
+                    pro.setEspecialidad2(rs.getString("especialidad2"));
+                    pro.setEspecialidad3(rs.getString("especialidad3"));
                 }
             } catch (SQLException e) {
 
@@ -125,8 +125,20 @@ Conexion cnx = new Conexion();
     }
 
     @Override
-    public boolean editar(Persona per) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean editar(int id) {
+    return false;
+    }
+    
+    public boolean editarProfesor(int id, String correo) {
+    String sql = "update profesores set correo ='"+correo+"' where cedula="+id;
+    try {
+            cn = cnx.getConnection();
+            ps = (PreparedStatement) cn.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            return false;
+        }
+     return true;
     }
 
     @Override

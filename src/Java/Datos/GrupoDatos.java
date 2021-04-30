@@ -38,6 +38,7 @@ Conexion cnx = new Conexion();
             rs = ps.executeQuery();
             while (rs.next()) {
              Grupo g = new Grupo();
+             g.setId(rs.getInt("id"));
              g.setCurso(cd.consultarCurso(rs.getInt("codigo_curso")));
              g.setProfesor((Profesor) pf.consultar(rs.getInt("cedula_profesor")));
              g.setHora(rs.getString("horario"));
@@ -57,12 +58,13 @@ Conexion cnx = new Conexion();
     public Grupo consultar(int id) {
           Grupo g = new Grupo();
         //String sql = "SELECT * FROM cursos WHERE nombre ='" + nombre +"'";
-        String sql = "SELECT * FROM cursos WHERE id="+id;
+        String sql = "SELECT * FROM grupos WHERE id="+id;
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
+             g.setId(rs.getInt("id"));
              g.setCurso(cd.consultarCurso(rs.getInt("codigo_curso")));
              g.setProfesor((Profesor) pf.consultar(rs.getInt("cedula_profesor")));
              g.setHora(rs.getString("horario"));
@@ -87,8 +89,16 @@ Conexion cnx = new Conexion();
     }
 
     
-    public boolean editar(Curso cur) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean editarGrupo(int id, Profesor p) {
+        String sql = "update grupos set cedula_profesor ="+p.getCedula()+" where id="+id;
+        try {
+            cn = cnx.getConnection();
+            ps = (PreparedStatement) cn.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            return false;
+        }
+     return true;
     }
 
    

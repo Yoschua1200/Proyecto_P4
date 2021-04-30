@@ -146,10 +146,28 @@ Conexion cnx = new Conexion();
     }
 
     
-    public boolean editar(Curso cur) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean editar(int id) {
+    return false;
+       
     }
-
+     public boolean editarStatus(int id, boolean flag) {
+      String sql;
+     if(flag==true){
+      sql = "update cursos set status = 'Normal' where codigo ="+id;
+             
+             }
+     else{
+        sql = "update cursos set status = 'Oferta' where codigo ="+id;
+     }
+      try {
+            cn = cnx.getConnection();
+            ps = (PreparedStatement) cn.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            return false;
+        }
+     return true;
+    }
    
     public boolean eliminar(int cod) {
         String sql = "delete from cursos where codigo="+cod;

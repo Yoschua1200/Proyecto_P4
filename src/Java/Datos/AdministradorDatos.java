@@ -112,7 +112,7 @@ Conexion cnx = new Conexion();
     }
 
     @Override
-    public boolean editar(Persona per) {
+    public boolean editar(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

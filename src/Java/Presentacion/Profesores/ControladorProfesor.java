@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Boris Monge
  */
-@WebServlet(name = "ControladorProfesor", urlPatterns = {"/RegistroProfesor"})
+@WebServlet(name = "ControladorProfesor", urlPatterns = {"/RegistroProfesor", "/EliminarProfesor", "/ConsultarProfesor", "/EditarProfesor"})
 public class ControladorProfesor extends HttpServlet {
 ModeloProfesor mp = new ModeloProfesor();
     /**
@@ -32,6 +32,7 @@ ModeloProfesor mp = new ModeloProfesor();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+          if ("/RegistroProfesor".equals(request.getServletPath())) {
             String cedula = request.getParameter("cedula");
             request.setAttribute("cedula", cedula);
             String nombre = request.getParameter("nombre");
@@ -55,6 +56,24 @@ ModeloProfesor mp = new ModeloProfesor();
             mp.getProfesor().setEspecialidad3(especialidad3);
             mp.getProfd().agregar(mp.getProfesor());
             request.getRequestDispatcher("admin.jsp").forward(request, response);
+          }
+          else if ("/EliminarProfesor".equals(request.getServletPath())){
+               mp.getProfd().eliminar(Integer.parseInt(request.getParameter("CedElim")));
+               request.getRequestDispatcher("admin.jsp").forward(request, response);   
+          }
+           else if("/ConsultarProfesor".equals(request.getServletPath())){
+             String cedProf = request.getParameter("cedulaConsul");
+             request.setAttribute("ConsultaProfesor", cedProf);
+             request.getRequestDispatcher("admin.jsp").forward(request, response); 
+              
+         }
+            else if("/EditarProfesor".equals(request.getServletPath())){
+             String correo = request.getParameter("correoEdit");
+             String ced = request.getParameter("cedProf");
+             mp.getProfd().editarProfesor(Integer.parseInt(ced), correo);
+             request.getRequestDispatcher("admin.jsp").forward(request, response); 
+              
+         }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

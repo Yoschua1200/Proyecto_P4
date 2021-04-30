@@ -62,4 +62,6 @@ public class Grupo {
         this.hora = hora;
         this.id = id;
     }
+
+   
 }
