@@ -65,6 +65,7 @@ public class ControladorAutenticacion extends HttpServlet {
             estudiante.setTelefono(telefono);
             estudianteDatos.agregar(estudiante);
             
+            request.setAttribute("flagE", "si");
             request.getRequestDispatcher("login.jsp").forward(request, response);
             
         }else if("/Log".equals(request.getServletPath())){
@@ -141,7 +142,8 @@ public class ControladorAutenticacion extends HttpServlet {
                     
                     request.getRequestDispatcher("profesor.jsp").forward(request, response);
                 }else{
-                     request.getRequestDispatcher("error.jsp").forward(request, response);
+                    request.setAttribute("error", "si");
+                     request.getRequestDispatcher("login.jsp").forward(request, response);
                 }
             } else {
                 request.getRequestDispatcher("login.jsp").forward(request, response);

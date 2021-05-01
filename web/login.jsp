@@ -16,6 +16,33 @@
     </head>
     <body style="padding-top: 70px">
 <%@ include file="header.jsp" %>
+
+<%String flag = (String) request.getAttribute("error");%>
+<%String flagE = (String) request.getAttribute("flagE");%>
+<%if(flag!=null){%>
+<%if(flag.equalsIgnoreCase("si")){%>
+  <div class="alert alert-danger" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="alert-heading">¡Error de autenticación!</h4>
+    <p>Usuario o contraseña incorrectos. </p>
+    <hr>
+</div>
+<%}%>
+<%}%>
+<%if(flagE!=null){%>
+<%if(flagE.equalsIgnoreCase("si")){%>
+  <div class="alert alert-success" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="alert-heading">¡Bienvenido!</h4>
+    <p>Te has registrado. ¡Inicia sesión! </p>
+    <hr>
+</div>
+<%}%>
+<%}%>
 <div class="container-fluid">
   <div class="row" style="padding-top: 70px">
 	<div class="col-lg-3"></div>

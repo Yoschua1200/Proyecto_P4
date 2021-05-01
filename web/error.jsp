@@ -29,7 +29,7 @@
 <body style="padding-top: 70px; padding-bottom: 70px;">
     <br>
     <%@ include file="header.jsp" %>
-
+    <>
     <div class="container"> 
         <div class="row">
             <div class="col-lg-3"></div>
