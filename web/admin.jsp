@@ -28,15 +28,88 @@
     <body style="padding-top: 70px; padding-bottom: 70px;">
 
         <%@ include file="header.jsp" %>
+        <%String flagA = (String) request.getAttribute("flagA");%>
+        <%String flagE = (String) request.getAttribute("flagE");%>
+        <%String flagEd = (String) request.getAttribute("flagEd");%>
+         
+        <%if(flagA!=null){%>
+         <%if(flagA.equalsIgnoreCase("si")){%>
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="alert-heading">¡Atención!</h4>
+            <p>Inserción realizada con éxito.</p>
+            <hr>
+        </div>
+        <%}else{%>
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="alert-heading">¡Atención!</h4>
+            <p>Ocurrió un error al realizar la inserción. </p>
+            <hr>
+            <p class="mb-0">Los datos ingresados fueron erróneos.</p>
+            </div>
+        <%}%>
+        <%}%>
+         <%if(flagE!=null){%>
+         <%if(flagE.equalsIgnoreCase("si")){%>
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="alert-heading">¡Atención!</h4>
+            <p>Eliminación realizada con éxito.</p>
+            <hr>
+        </div>
+        <%}else{%>
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="alert-heading">¡Atención!</h4>
+            <p>Ocurrió un error al realizar la eliminación. </p>
+            <hr>
+            <p class="mb-0">La opción seleccionada se encuentra asociada a otra entidad.</p>
+            </div>
+        <%}%>
+        <%}%>
+         <%if(flagEd!=null){%>
+         <%if(flagEd.equalsIgnoreCase("si")){%>
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="alert-heading">¡Atención!</h4>
+            <p>Edición realizada con éxito.</p>
+            <hr>
+        </div>
+        <%}else{%>
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="alert-heading">¡Atención!</h4>
+            <p>Ocurrió un error al realizar la edición. </p>
+            <hr>
+            <p class="mb-0">Los datos ingresados fueron erróneos.</p>
+            </div>
+        <%}%>
+        <%}%>
+
         <% String banderaConsultarCurso = (String) request.getAttribute("ConsultaCurso"); %>
         <% String banderaConsultarGrupo = (String) request.getAttribute("ConsultaGrupo"); %>
         <% String banderaConsultarProfesor = (String) request.getAttribute("ConsultaProfesor"); %>
         <% String banderaLogin = (String) request.getSession().getAttribute("banderaLogin");
+        
             tipoUsuario = (String) request.getSession().getAttribute("tipo");
 
             if (banderaLogin == "1" && tipoUsuario == "3") {
         %> 
-
+       
+        
         <div class="container"> 
             <div class="row">
                 <div class="col-lg-5">
@@ -45,7 +118,7 @@
                         <div class="col-lg-4"> 
                             <img src="images/pururin.jpg" class="rounded-circle img-fluid" alt="Placeholder image">
                         </div>
-
+                  
                         <div class="col-lg-8"> 
                             <h6>Nombre: ${nombre}</h6>
                             <h6>Cédula: ${cedulaAdmin}</h6>
@@ -76,10 +149,6 @@
                                 <div class="card-body">
 
                                     <form action="RegistroCurso" method="POST">
-                                        <div class="form-group">
-                                            <label>Código</label>
-                                            <input type="text" class="form-control" name="codigo" placeholder="Código">
-                                        </div>
                                         <div class="form-group">
                                             <label>Nombre</label>
                                             <input type="text" class="form-control" name="nombre" placeholder="Nombre">
@@ -831,7 +900,7 @@
                                                                 <form class="form-inline my-2 my-lg-0" action="EditarProfesor" method="POST">
                                                                     <div class="form-group">
 
-                                                                        <input type = "text" name="correoEdit" class="form-control"  placeholder="Correo">
+                                                                        <input type = "text" name="correoEdit" class="form-control"  placeholder="Nuevo correo eléctronico">
                                                                         <input type = "hidden" name="cedProf" class="form-control" value="<%= p2.getCedula()%>" placeholder="id prof">
 
                                                                     </div>

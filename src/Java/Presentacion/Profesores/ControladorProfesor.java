@@ -54,11 +54,15 @@ ModeloProfesor mp = new ModeloProfesor();
             mp.getProfesor().setEspecialidad1(especialidad1);
             mp.getProfesor().setEspecialidad2(especialidad2);
             mp.getProfesor().setEspecialidad3(especialidad3);
-            mp.getProfd().agregar(mp.getProfesor());
+            boolean x = mp.getProfd().agregar(mp.getProfesor());
+             if(x==true){ request.setAttribute("flagA", "si");}
+            else{request.setAttribute("flagA", "no");}
             request.getRequestDispatcher("admin.jsp").forward(request, response);
           }
           else if ("/EliminarProfesor".equals(request.getServletPath())){
-               mp.getProfd().eliminar(Integer.parseInt(request.getParameter("CedElim")));
+              boolean x = mp.getProfd().eliminar(Integer.parseInt(request.getParameter("CedElim")));
+                if(x==true){ request.setAttribute("flagE", "si");}
+            else{request.setAttribute("flagE", "no");}
                request.getRequestDispatcher("admin.jsp").forward(request, response);   
           }
            else if("/ConsultarProfesor".equals(request.getServletPath())){
@@ -70,7 +74,9 @@ ModeloProfesor mp = new ModeloProfesor();
             else if("/EditarProfesor".equals(request.getServletPath())){
              String correo = request.getParameter("correoEdit");
              String ced = request.getParameter("cedProf");
-             mp.getProfd().editarProfesor(Integer.parseInt(ced), correo);
+             boolean x = mp.getProfd().editarProfesor(Integer.parseInt(ced), correo);
+              if(x==true){ request.setAttribute("flagEd", "si");}
+              else{request.setAttribute("flagEd", "no");}
              request.getRequestDispatcher("admin.jsp").forward(request, response); 
               
          }

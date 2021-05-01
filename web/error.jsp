@@ -18,7 +18,14 @@
 <link rel="shortcut icon" href="images/logo.ico" type="">
 
 </head>
-
+<div class="alert alert-danger" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="alert-heading">¡Buen intento!</h4>
+    <p>No puedes ingresar sin iniciar sesión. </p>
+    <hr>
+</div>
 <body style="padding-top: 70px; padding-bottom: 70px;">
     <br>
     <%@ include file="header.jsp" %>

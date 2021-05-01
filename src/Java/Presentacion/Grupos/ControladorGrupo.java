@@ -46,12 +46,18 @@ ModeloGrupo mg = new ModeloGrupo();
             mg.getGrupo().setCurso(mg.getCurd().consultarCurso(Integer.parseInt(codigoCurso)));
             mg.getGrupo().setProfesor((Profesor) mg.getProfd().consultar(Integer.parseInt(cedProfe)));
             mg.getGrupo().setHora(horario);
-            mg.getGrupd().agregar(mg.getGrupo());
+            boolean x = mg.getGrupd().agregar(mg.getGrupo());
+            
+             if(x==true){ request.setAttribute("flagA", "si");}
+            else{request.setAttribute("flagA", "no");}
             request.getRequestDispatcher("admin.jsp").forward(request, response);
           }
           else if ("/EliminarGrupo".equals(request.getServletPath())) { 
-              mg.getGrupd().eliminar(Integer.parseInt(request.getParameter("IdElim")));
-                   request.getRequestDispatcher("admin.jsp").forward(request, response);
+              boolean x = mg.getGrupd().eliminar(Integer.parseInt(request.getParameter("IdElim")));
+               if(x==true){ request.setAttribute("flagE", "si");}
+            else{request.setAttribute("flagE", "no");}
+            request.getRequestDispatcher("admin.jsp").forward(request, response);
+           
               }
           else if ("/ConsultarGrupo".equals(request.getServletPath())) {    
               String CodCurso = request.getParameter("codigoConsul");
@@ -62,7 +68,9 @@ ModeloGrupo mg = new ModeloGrupo();
             String cedProf = request.getParameter("EditGrupo");
              String CodGrupo = request.getParameter("IdGrupo");
              Profesor p = (Profesor) mg.getProfd().consultar(Integer.parseInt(cedProf));
-             mg.getGrupd().editarGrupo(Integer.parseInt(CodGrupo), p);
+             boolean x = mg.getGrupd().editarGrupo(Integer.parseInt(CodGrupo), p);
+              if(x==true){ request.setAttribute("flagEd", "si");}
+              else{request.setAttribute("flagEd", "no");}
              request.getRequestDispatcher("admin.jsp").forward(request, response); 
             }
     }
