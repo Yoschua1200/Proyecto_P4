@@ -19,6 +19,7 @@
 
 <%String flag = (String) request.getAttribute("error");%>
 <%String flagE = (String) request.getAttribute("flagE");%>
+<%String clave = (String) request.getAttribute("clave"); %>
 <%if(flag!=null){%>
 <%if(flag.equalsIgnoreCase("si")){%>
   <div class="alert alert-danger" role="alert">
@@ -40,6 +41,7 @@
     <h4 class="alert-heading">¡Bienvenido!</h4>
     <p>Te has registrado. ¡Inicia sesión! </p>
     <hr>
+    <h4>Tu contraseña será:  <%=clave%> </h4>
 </div>
 <%}%>
 <%}%>
@@ -66,6 +68,10 @@
 	<div class="col-lg-3"></div>
   </div>
 </div>
+<%if(flagE.equalsIgnoreCase("si")){%>
+<br> <br>
+<%}%>
+
 </body>
 <%@ include file="footer.jsp" %>
 </html>

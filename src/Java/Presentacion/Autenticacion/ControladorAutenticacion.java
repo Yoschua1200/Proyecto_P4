@@ -41,9 +41,11 @@ public class ControladorAutenticacion extends HttpServlet {
             request.setAttribute("telefono", telefono);
             String correo = request.getParameter("correo");
             request.setAttribute("correo", correo);
+            String clave = request.getParameter("clave");
+            request.setAttribute("clave", clave);
             
             ma.getUsuario().setCedula(Integer.parseInt(cedula));
-            ma.getUsuario().setClave("1234");
+            ma.getUsuario().setClave(clave);
             ma.getUsuario().setTipo(1);
             ma.getUsuarioDatos().agregar(ma.getUsuario());
             

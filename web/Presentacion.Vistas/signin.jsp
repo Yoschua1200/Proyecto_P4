@@ -16,6 +16,7 @@
     </head>
 <body style="padding-top: 70px">
 <%@ include file="header.jsp" %>
+<% long num = (int) (Math.random() * 10000); %>
 <div class="container-fluid">
   <div class="row" style="padding-top: 70px">
 	<div class="col-lg-3"></div>
@@ -35,19 +36,15 @@
         </div>
         <div class="form-group">
           <label>Teléfono</label>
-          
-           
-          
           <input type="text" class="form-control" name="telefono" placeholder="Teléfono">
+        </div>
+        <div class="form-group">
+          <input type="hidden" class="form-control" name="clave" value="<%=num%> ">
         </div>
         <div class="form-group">
           <label for="exampleInputEmail1">Dirección de correo electrónico</label>
           <input type="email" class="form-control" name="correo" id="exampleInputEmail1" placeholder="Correo">
         </div>
-        <!--<div class="form-group">
-          <label for="exampleInputPassword1">Contraseña</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
-        </div>-->
         <div class="form-group">
             <h6>¿Ya estás registrado? <a class="titulos" href="login.jsp"> Inicia sesión </a></h6>
         </div>
