@@ -25,8 +25,7 @@ import javax.servlet.http.HttpServletResponse;
                                 "/VerCurso", "/EliminarCurso", "/ConsultarCurso", "/Matricular", "/Index"})
 public class ControladorCurso extends HttpServlet {
 
-    Curso curso = new Curso();
-    CursoDatos cursosdatos = new CursoDatos();
+    ModeloCursos md = new ModeloCursos();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String flag = "";
@@ -46,12 +45,12 @@ public class ControladorCurso extends HttpServlet {
             String logo = request.getParameter("logo");
             request.setAttribute("logo", logo);
             
-            curso.setNombre(nombre);
-            curso.setTematica(tematica);
-            curso.setCosto(costo);
-            curso.setStatus(status);
-            curso.setLogo(logo);
-            boolean x = cursosdatos.agregar(curso);
+            md.getCurso().setNombre(nombre);
+            md.getCurso().setTematica(tematica);
+            md.getCurso().setCosto(costo);
+            md.getCurso().setStatus(status);
+            md.getCurso().setLogo(logo);
+            boolean x = md.getCursosdatos().agregar(md.getCurso());
              if(x==true){ request.setAttribute("flagA", "si");}
             else{request.setAttribute("flagA", "no");}
             request.getRequestDispatcher("admin.jsp").forward(request, response);
@@ -72,7 +71,7 @@ public class ControladorCurso extends HttpServlet {
         }
         else if("/EliminarCurso".equals(request.getServletPath())) {
            // cursosdatos.eliminar((int) request.getAttribute("codigoElim"));
-           boolean x = cursosdatos.eliminar(Integer.parseInt(request.getParameter("codigoElim")));
+           boolean x = md.getCursosdatos().eliminar(Integer.parseInt(request.getParameter("codigoElim")));
              if(x==true){ request.setAttribute("flagE", "si");}
             else{request.setAttribute("flagE", "no");}
                request.getRequestDispatcher("admin.jsp").forward(request, response);   
@@ -86,14 +85,14 @@ public class ControladorCurso extends HttpServlet {
          else if("/EditarCurso".equals(request.getServletPath())){
              boolean flag2;
              String CodCurso = request.getParameter("codigoActualizar");
-             Curso c = cursosdatos.consultarCurso(Integer.parseInt(CodCurso));
+             Curso c = md.getCursosdatos().consultarCurso(Integer.parseInt(CodCurso));
              if(c.getStatus().equals("Oferta")){
                  flag2 = true;
              }
              else{
                  flag2 = false;
              }
-             boolean x = cursosdatos.editarStatus(Integer.parseInt(CodCurso),flag2);
+             boolean x = md.getCursosdatos().editarStatus(Integer.parseInt(CodCurso),flag2);
               if(x==true){ request.setAttribute("flagEd", "si");}
               else{request.setAttribute("flagEd", "no");}
              request.getRequestDispatcher("admin.jsp").forward(request, response); 

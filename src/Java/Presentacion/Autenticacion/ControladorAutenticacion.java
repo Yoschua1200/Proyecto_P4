@@ -3,16 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Presentacion.Cursos;
+package Presentacion.Autenticacion;
 
-import Datos.AdministradorDatos;
-import Datos.EstudianteDatos;
-import Datos.ProfesorDatos;
-import Datos.UsuarioDatos;
-import Logica.Administrador;
-import Logica.Estudiante;
-import Logica.Profesor;
-import Logica.Usuario;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
@@ -32,14 +25,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "ControladorAutenticacion", 
             urlPatterns = {"/RegistroEstudiante", "/Log", "/Logout"})
 public class ControladorAutenticacion extends HttpServlet {
-    Usuario usuario = new Usuario();
-    UsuarioDatos usuarioDatos = new UsuarioDatos();
-    Estudiante estudiante = new Estudiante();
-    EstudianteDatos estudianteDatos = new EstudianteDatos();
-    Profesor profesor = new Profesor();
-    ProfesorDatos profesorDatos = new ProfesorDatos();
-    Administrador administrador = new Administrador();
-    AdministradorDatos administradorDatos = new AdministradorDatos();
+    ModeloAutenticacion ma = new ModeloAutenticacion();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -54,16 +40,16 @@ public class ControladorAutenticacion extends HttpServlet {
             String correo = request.getParameter("correo");
             request.setAttribute("correo", correo);
             
-            usuario.setCedula(Integer.parseInt(cedula));
-            usuario.setClave("1234");
-            usuario.setTipo(1);
-            usuarioDatos.agregar(usuario);
+            ma.getUsuario().setCedula(Integer.parseInt(cedula));
+            ma.getUsuario().setClave("1234");
+            ma.getUsuario().setTipo(1);
+            ma.getUsuarioDatos().agregar(ma.getUsuario());
             
-            estudiante.setCedula(Integer.parseInt(cedula));
-            estudiante.setNombre(nombre);
-            estudiante.setCorreo(correo);
-            estudiante.setTelefono(telefono);
-            estudianteDatos.agregar(estudiante);
+            ma.getEstudiante().setCedula(Integer.parseInt(cedula));
+            ma.getEstudiante().setNombre(nombre);
+            ma.getEstudiante().setCorreo(correo);
+            ma.getEstudiante().setTelefono(telefono);
+            ma.getEstudianteDatos().agregar(ma.getEstudiante());
             
             request.setAttribute("flagE", "si");
             request.getRequestDispatcher("login.jsp").forward(request, response);
@@ -75,48 +61,48 @@ public class ControladorAutenticacion extends HttpServlet {
             String contrasena = request.getParameter("contrasena");
             request.setAttribute("contrasena", contrasena);
             
-            usuario = usuarioDatos.validar(Integer.parseInt(cedula),contrasena);
+            ma.setUsuario(ma.getUsuarioDatos().validar(Integer.parseInt(cedula),contrasena));
             
-            if (usuario!=null) {
+            if (ma.getUsuario()!=null) {
                 
-                if(usuario.getTipo() == 3){
-                    administrador = administradorDatos.consultarAdministrador(Integer.parseInt(cedula));
+                if(ma.getUsuario().getTipo() == 3){
+                    ma.setAdministrador(ma.getAdministradorDatos().consultarAdministrador(Integer.parseInt(cedula)));
                     String banderaLogin = "1";
                     request.getSession().setAttribute("banderaLogin", banderaLogin);
                     String banderaLoginDos = "true";
                     request.setAttribute("banderaLoginDos", banderaLoginDos);
                     String tipo = "3";
                     request.getSession().setAttribute("tipo", tipo);
-                    int cedulaAdmin = administrador.getCedula();
+                    int cedulaAdmin = ma.getAdministrador().getCedula();
                     request.getSession().setAttribute("cedulaAdmin", cedulaAdmin);
-                    String nombre = administrador.getNombre();
+                    String nombre = ma.getAdministrador().getNombre();
                     request.getSession().setAttribute("nombre", nombre);
-                    String correo = administrador.getCorreo();
+                    String correo = ma.getAdministrador().getCorreo();
                     request.getSession().setAttribute("correo", correo);
-                    String telefono = administrador.getTelefono();
+                    String telefono =ma.getAdministrador().getTelefono();
                     request.getSession().setAttribute("telefono", telefono);
                     
                     request.getRequestDispatcher("admin.jsp").forward(request, response);
-                }else if (usuario.getTipo() == 1) {
+                }else if (ma.getUsuario().getTipo() == 1) {
                     //SE CREA EL ESTUDIANTE CON BASE UNA CONSULTA POR ID YA VALIDADA
-                    estudiante = estudianteDatos.consultarEstudiante(Integer.parseInt(cedula));
+                    ma.setEstudiante(ma.getEstudianteDatos().consultarEstudiante(Integer.parseInt(cedula)));
                     String banderaLogin = "1";
                     request.getSession().setAttribute("banderaLogin", banderaLogin);
                     String banderaLoginDos = "true";
                     request.setAttribute("banderaLoginDos", banderaLoginDos);
                     String tipo = "1";
                     request.getSession().setAttribute("tipo", tipo);
-                    int cedulaEst = estudiante.getCedula();
+                    int cedulaEst = ma.getEstudiante().getCedula();
                     request.getSession().setAttribute("cedulaEst", cedulaEst);
-                    String nombre = estudiante.getNombre();
+                    String nombre = ma.getEstudiante().getNombre();
                     request.getSession().setAttribute("nombre", nombre);
-                    String correo = estudiante.getCorreo();
+                    String correo = ma.getEstudiante().getCorreo();
                     request.getSession().setAttribute("correo", correo);
-                    String telefono = estudiante.getTelefono();
+                    String telefono = ma.getEstudiante().getTelefono();
                     request.getSession().setAttribute("telefono", telefono);
                     request.getRequestDispatcher("estudiante.jsp").forward(request, response);
-                }else if(usuario.getTipo() == 2){
-                    profesor = profesorDatos.consultarProfesor(Integer.parseInt(cedula));
+                }else if(ma.getUsuario().getTipo() == 2){
+                    ma.setProfesor(ma.getProfesorDatos().consultarProfesor(Integer.parseInt(cedula)));
                     String banderaLogin = "1";
                     request.getSession().setAttribute("banderaLogin", banderaLogin);
                     String banderaLoginDos = "true";
@@ -124,20 +110,20 @@ public class ControladorAutenticacion extends HttpServlet {
                     String tipo = "2";
                     request.getSession().setAttribute("tipo", tipo);
                     
-                    int cedulaPro = profesor.getCedula();
+                    int cedulaPro = ma.getProfesor().getCedula();
                     request.getSession().setAttribute("cedulaPro", cedulaPro);
-                    String nombre = profesor.getNombre();
+                    String nombre = ma.getProfesor().getNombre();
                     request.getSession().setAttribute("nombre", nombre);
-                    String correo = profesor.getCorreo();
+                    String correo = ma.getProfesor().getCorreo();
                     request.getSession().setAttribute("correo", correo);
-                    String telefono = profesor.getTelefono();
+                    String telefono = ma.getProfesor().getTelefono();
                     request.getSession().setAttribute("telefono", telefono);
                     
-                    String especialidad1 = profesor.getEspecialidad1();
+                    String especialidad1 = ma.getProfesor().getEspecialidad1();
                     request.getSession().setAttribute("especialidad1", especialidad1);
-                    String especialidad2 = profesor.getEspecialidad2();
+                    String especialidad2 = ma.getProfesor().getEspecialidad2();
                     request.getSession().setAttribute("especialidad2", especialidad2);
-                    String especialidad3 = profesor.getEspecialidad3();
+                    String especialidad3 = ma.getProfesor().getEspecialidad3();
                     request.getSession().setAttribute("especialidad3", especialidad3);
                     
                     request.getRequestDispatcher("profesor.jsp").forward(request, response);
