@@ -23,14 +23,16 @@ import javax.servlet.http.HttpSession;
  * @author Danny
  */
 @WebServlet(name = "ControladorAutenticacion", 
-            urlPatterns = {"/RegistroEstudiante", "/Log", "/Logout"})
+            urlPatterns = {"/Presentacion.Vistas/RegistroEstudiante", 
+                           "/Presentacion.Vistas/Log", 
+                           "/Presentacion.Vistas/Logout"})
 public class ControladorAutenticacion extends HttpServlet {
     ModeloAutenticacion ma = new ModeloAutenticacion();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        if("/RegistroEstudiante".equals(request.getServletPath())){
+        if("/Presentacion.Vistas/RegistroEstudiante".equals(request.getServletPath())){
             String cedula = request.getParameter("cedula");
             request.setAttribute("cedula", cedula);
             String nombre = request.getParameter("nombre");
@@ -52,9 +54,9 @@ public class ControladorAutenticacion extends HttpServlet {
             ma.getEstudianteDatos().agregar(ma.getEstudiante());
             
             request.setAttribute("flagE", "si");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("/Presentacion.Vistas/login.jsp").forward(request, response);
             
-        }else if("/Log".equals(request.getServletPath())){
+        }else if("/Presentacion.Vistas/Log".equals(request.getServletPath())){
             
             String cedula = request.getParameter("cedula");
             request.setAttribute("cedula", cedula);
@@ -82,7 +84,7 @@ public class ControladorAutenticacion extends HttpServlet {
                     String telefono =ma.getAdministrador().getTelefono();
                     request.getSession().setAttribute("telefono", telefono);
                     
-                    request.getRequestDispatcher("admin.jsp").forward(request, response);
+                    request.getRequestDispatcher("/Presentacion.Vistas/admin.jsp").forward(request, response);
                 }else if (ma.getUsuario().getTipo() == 1) {
                     //SE CREA EL ESTUDIANTE CON BASE UNA CONSULTA POR ID YA VALIDADA
                     ma.setEstudiante(ma.getEstudianteDatos().consultarEstudiante(Integer.parseInt(cedula)));
@@ -100,7 +102,7 @@ public class ControladorAutenticacion extends HttpServlet {
                     request.getSession().setAttribute("correo", correo);
                     String telefono = ma.getEstudiante().getTelefono();
                     request.getSession().setAttribute("telefono", telefono);
-                    request.getRequestDispatcher("estudiante.jsp").forward(request, response);
+                    request.getRequestDispatcher("/Presentacion.Vistas/estudiante.jsp").forward(request, response);
                 }else if(ma.getUsuario().getTipo() == 2){
                     ma.setProfesor(ma.getProfesorDatos().consultarProfesor(Integer.parseInt(cedula)));
                     String banderaLogin = "1";
@@ -126,19 +128,19 @@ public class ControladorAutenticacion extends HttpServlet {
                     String especialidad3 = ma.getProfesor().getEspecialidad3();
                     request.getSession().setAttribute("especialidad3", especialidad3);
                     
-                    request.getRequestDispatcher("profesor.jsp").forward(request, response);
+                    request.getRequestDispatcher("/Presentacion.Vistas/profesor.jsp").forward(request, response);
                 }else{
                     request.setAttribute("error", "si");
-                     request.getRequestDispatcher("login.jsp").forward(request, response);
+                     request.getRequestDispatcher("/Presentacion.Vistas/login.jsp").forward(request, response);
                 }
             } else {
-                request.getRequestDispatcher("login.jsp").forward(request, response);
+                request.getRequestDispatcher("/Presentacion.Vistas/login.jsp").forward(request, response);
             }
 
-        } else if ("/Logout".equals(request.getServletPath())) {
+        } else if ("/Presentacion.Vistas/Logout".equals(request.getServletPath())) {
             HttpSession session = request.getSession(true);
             session.invalidate();
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            request.getRequestDispatcher("/Presentacion.Vistas/index.jsp").forward(request, response);
         }
     }
     

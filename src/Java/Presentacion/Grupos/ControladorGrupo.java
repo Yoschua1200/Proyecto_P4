@@ -19,7 +19,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Boris Monge
  */
-@WebServlet(name = "ControladorGrupo", urlPatterns = {"/RegistroGrupo", "/EliminarGrupo", "/ConsultarGrupo", "/EditarGrupo"})
+@WebServlet(name = "ControladorGrupo", urlPatterns = {"/Presentacion.Vistas/RegistroGrupo", 
+    "/Presentacion.Vistas/EliminarGrupo", "/Presentacion.Vistas/ConsultarGrupo", "/Presentacion.Vistas/EditarGrupo"})
 public class ControladorGrupo extends HttpServlet {
 ModeloGrupo mg = new ModeloGrupo();
     /**
@@ -36,7 +37,7 @@ ModeloGrupo mg = new ModeloGrupo();
         response.setContentType("text/html;charset=UTF-8");
         
             /* TODO output your page here. You may use following sample code. */
-              if ("/RegistroGrupo".equals(request.getServletPath())) {
+              if ("/Presentacion.Vistas/RegistroGrupo".equals(request.getServletPath())) {
             String codigoCurso = request.getParameter("curso");
             request.setAttribute("curso", codigoCurso);
             String cedProfe = request.getParameter("profesor");
@@ -50,28 +51,27 @@ ModeloGrupo mg = new ModeloGrupo();
             
              if(x==true){ request.setAttribute("flagA", "si");}
             else{request.setAttribute("flagA", "no");}
-            request.getRequestDispatcher("admin.jsp").forward(request, response);
+            request.getRequestDispatcher("/Presentacion.Vistas/admin.jsp").forward(request, response);
           }
-          else if ("/EliminarGrupo".equals(request.getServletPath())) { 
+          else if ("/Presentacion.Vistas/EliminarGrupo".equals(request.getServletPath())) { 
               boolean x = mg.getGrupd().eliminar(Integer.parseInt(request.getParameter("IdElim")));
                if(x==true){ request.setAttribute("flagE", "si");}
             else{request.setAttribute("flagE", "no");}
-            request.getRequestDispatcher("admin.jsp").forward(request, response);
-           
+            request.getRequestDispatcher("/Presentacion.Vistas/admin.jsp").forward(request, response);
               }
-          else if ("/ConsultarGrupo".equals(request.getServletPath())) {    
+          else if ("/Presentacion.Vistas/ConsultarGrupo".equals(request.getServletPath())) {    
               String CodCurso = request.getParameter("codigoConsul");
              request.setAttribute("ConsultaGrupo", CodCurso);
-             request.getRequestDispatcher("admin.jsp").forward(request, response); 
+             request.getRequestDispatcher("/Presentacion.Vistas/admin.jsp").forward(request, response); 
             }
-          else if ("/EditarGrupo".equals(request.getServletPath())) {    
+          else if ("/Presentacion.Vistas/EditarGrupo".equals(request.getServletPath())) {    
             String cedProf = request.getParameter("EditGrupo");
              String CodGrupo = request.getParameter("IdGrupo");
              Profesor p = (Profesor) mg.getProfd().consultar(Integer.parseInt(cedProf));
              boolean x = mg.getGrupd().editarGrupo(Integer.parseInt(CodGrupo), p);
               if(x==true){ request.setAttribute("flagEd", "si");}
               else{request.setAttribute("flagEd", "no");}
-             request.getRequestDispatcher("admin.jsp").forward(request, response); 
+             request.getRequestDispatcher("/Presentacion.Vistas/admin.jsp").forward(request, response); 
             }
     }
 

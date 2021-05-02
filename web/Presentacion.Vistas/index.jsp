@@ -18,10 +18,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CursosLibres.com</title>
-<link href="css/bootstrap-4.4.1.css" rel="stylesheet" type="text/css">
-<link href="css/style.css" rel="stylesheet" type="text/css">
+<link href="../css/bootstrap-4.4.1.css" rel="stylesheet" type="text/css">
+<link href="../css/style.css" rel="stylesheet" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<link rel="shortcut icon" href="images/logo.ico" type="">
+<link rel="shortcut icon" href="../images/logo.ico" type="">
 
 </head>
 
@@ -44,7 +44,7 @@
                 %>
                 <div class="carousel-item"> 
                     <h3 class="parpadea">¡EN OFERTA!</h3>
-                    <img class="d-block mx-auto" src="images/<%= c.getLogo()%>" alt="First slide">
+                    <img class="d-block mx-auto" src="../images/<%= c.getLogo()%>" alt="First slide">
                     <div class="carousel-caption">
                         <span class="titulo_carusel"><%= c.getNombre()%></span>
                     </div>
@@ -52,9 +52,8 @@
                 <%}
                         }%>
                 <div class="carousel-item active"> 
-                    <img class="d-block mx-auto" src="images/index.jpg" width="600" height="400" alt="Second slide">
+                    <img class="d-block mx-auto" src="../images/index.jpg" width="600" height="400" alt="Second slide">
                     <div class="carousel-caption">
-                        <h5>Carr</h5>
                     </div>
                 </div>
             </div>

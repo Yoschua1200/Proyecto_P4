@@ -23,7 +23,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>CursosLibres.com</title>
-        <link rel="shortcut icon" href="images/logo.ico" type="">
+        <link rel="shortcut icon" href="../images/logo.ico" type="">
     </head>
     <body style="padding-top: 70px; padding-bottom: 70px;">
 
@@ -116,7 +116,7 @@
 
                     <div class="row">
                         <div class="col-lg-4"> 
-                            <img src="images/pururin.jpg" class="rounded-circle img-fluid" alt="Placeholder image">
+                            <img src="../images/pururin.jpg" class="rounded-circle img-fluid" alt="Placeholder image">
                         </div>
                   
                         <div class="col-lg-8"> 
@@ -148,7 +148,7 @@
                             <div id="colapsarAcordionUno" class="collapse" role="tabpanel" aria-labelledby="tituloUno" data-parent="#accordion1">
                                 <div class="card-body">
 
-                                    <form action="RegistroCurso" method="POST">
+                                    <form action="/Proyecto_P4/Presentacion.Vistas/RegistroCurso" method="POST">
                                         <div class="form-group">
                                             <label>Nombre</label>
                                             <input type="text" class="form-control" name="nombre" placeholder="Nombre">
@@ -232,7 +232,7 @@
                                                                 </tr>
 
                                                                 <tr>
-                                                                <form class="form-inline my-2 my-lg-0" action="EliminarCurso" method="POST">
+                                                                <form class="form-inline my-2 my-lg-0" action="/Proyecto_P4/Presentacion.Vistas/EliminarCurso" method="POST">
                                                                     <div class="form-group">
 
                                                                         <input type = "hidden" name="codigoElim" class="form-control" value="<%= c.getCodigo()%>" placeholder="Eliminar">
@@ -274,7 +274,7 @@
                             </div>
                             <div id="colapsarAcordionTres" class="collapse" role="tabpanel" aria-labelledby="tituloTres" data-parent="#accordion3">
                                 <div class="card-body">
-                                    <form class="form-inline my-2 my-lg-0" action="ConsultarCurso" method="POST">
+                                    <form class="form-inline my-2 my-lg-0" action="/Proyecto_P4/Presentacion.Vistas/ConsultarCurso" method="POST">
                                         <div class="form-group">
 
                                             <input type = "text" name="codigoConsul" class="form-control" placeholder="Código de curso">
@@ -364,7 +364,7 @@
                                                                 </tr>
 
                                                                 <tr>
-                                                                <form class="form-inline my-2 my-lg-0" action="EditarCurso" method="POST">
+                                                                <form class="form-inline my-2 my-lg-0" action="/Proyecto_P4/Presentacion.Vistas/EditarCurso" method="POST">
                                                                     <div class="form-group">
 
                                                                         <input type = "hidden" name="codigoActualizar" class="form-control" value="<%= c3.getCodigo()%>" placeholder="Cambiar de estado">
@@ -411,7 +411,7 @@
                             <div id="colapsarAcordionUnoGrupo" class="collapse" role="tabpanel" aria-labelledby="tituloUnoGrupo" data-parent="#accordion1Grupo">
                                 <div class="card-body">
 
-                                    <form action="RegistroGrupo" method="POST">
+                                    <form action="/Proyecto_P4/Presentacion.Vistas/RegistroGrupo" method="POST">
                                         <div class="form-group">
                                             <label>Código de curso asociado</label>
                                             <input type="text" class="form-control" name="curso" placeholder="Código de curso asociado">
@@ -481,7 +481,7 @@
                                                                 </tr>
 
                                                                 <tr>
-                                                                <form class="form-inline my-2 my-lg-0" action="EliminarGrupo" method="POST">
+                                                                <form class="form-inline my-2 my-lg-0" action="/Proyecto_P4/Presentacion.Vistas/EliminarGrupo" method="POST">
                                                                     <div class="form-group">
 
                                                                         <input type = "hidden" name="IdElim" class="form-control" value="<%= g.getId()%>" placeholder="Eliminar">
@@ -525,7 +525,7 @@
                             <div id="colapsarAcordionTresGrupo" class="collapse" role="tabpanel" aria-labelledby="tituloTresGrupo" data-parent="#accordion3Grupo">
                                 <div class="card-body">
                                     
-                                    <form class="form-inline my-2 my-lg-0" action="ConsultarGrupo" method="POST">
+                                    <form class="form-inline my-2 my-lg-0" action="/Proyecto_P4/Presentacion.Vistas/ConsultarGrupo" method="POST">
                                         <div class="form-group">
                                             
                                             <input type = "text" name="codigoConsul" class="form-control" placeholder="Código de grupo">
@@ -614,7 +614,7 @@
                                                                 </tr>
                                                               
                                                                 <tr>
-                                                                <form class="form-inline my-2 my-lg-0" action="EditarGrupo" method="POST">
+                                                                <form class="form-inline my-2 my-lg-0" action="/Proyecto_P4/Presentacion.Vistas/EditarGrupo" method="POST">
                                                                     <div class="form-group">
 
                                                                         <input type = "text" name="EditGrupo" class="form-control"  placeholder="Cédula de nuevo profesor">
@@ -662,7 +662,7 @@
                             <div id="colapsarAcordionUnoProfesor" class="collapse" role="tabpanelProfesor" aria-labelledby="tituloUnoProfesor" data-parent="#accordion1Profesor">
                                 <div class="card-body">
 
-                                    <form action="RegistroProfesor" method="POST">
+                                    <form action="/Proyecto_P4/Presentacion.Vistas/RegistroProfesor" method="POST">
                                         <div class="form-group">
                                             <label>Cédula</label>
                                             <input type="text" class="form-control" name="cedula" placeholder="Cédula">
@@ -759,7 +759,7 @@
                                                                 <h5>Especialidad 3: <%=p.getEspecialidad3()%></h5>
                                                                 </tr>
                                                                 <tr>
-                                                                <form class="form-inline my-2 my-lg-0" action="EliminarProfesor" method="POST">
+                                                                <form class="form-inline my-2 my-lg-0" action="/Proyecto_P4/Presentacion.Vistas/EliminarProfesor" method="POST">
                                                                     <div class="form-group">
 
                                                                         <input type = "hidden" name="CedElim" class="form-control" value="<%= p.getCedula()%>" placeholder="Eliminar">
@@ -801,7 +801,7 @@
                             </div>
                             <div id="colapsarAcordionTresProfesor" class="collapse" role="tabpanel" aria-labelledby="tituloTresProfesor" data-parent="#accordion3Profesor">
                                 <div class="card-body">
-                                     <form class="form-inline my-2 my-lg-0" action="ConsultarProfesor" method="POST">
+                                     <form class="form-inline my-2 my-lg-0" action="/Proyecto_P4/Presentacion.Vistas/ConsultarProfesor" method="POST">
                                         <div class="form-group">
                                             
                                             <input type = "text" name="cedulaConsul" class="form-control" placeholder="Cédula de profesor">
@@ -897,7 +897,7 @@
                                                                 <h5>Correo eléctronico: <%= p2.getCorreo()%> </h5>
                                                                 </tr>
                                                                   <tr>
-                                                                <form class="form-inline my-2 my-lg-0" action="EditarProfesor" method="POST">
+                                                                <form class="form-inline my-2 my-lg-0" action="/Proyecto_P4/Presentacion.Vistas/EditarProfesor" method="POST">
                                                                     <div class="form-group">
 
                                                                         <input type = "text" name="correoEdit" class="form-control"  placeholder="Nuevo correo eléctronico">

@@ -12,10 +12,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CursosLibres.com</title>
-<link href="css/bootstrap-4.4.1.css" rel="stylesheet" type="text/css">
-<link href="css/style.css" rel="stylesheet" type="text/css">
+<link href="../css/bootstrap-4.4.1.css" rel="stylesheet" type="text/css">
+<link href="../css/style.css" rel="stylesheet" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<link rel="shortcut icon" href="images/logo.ico" type="">
+<link rel="shortcut icon" href="../images/logo.ico" type="">
 
 </head>
 <div class="alert alert-danger" role="alert">
@@ -34,7 +34,7 @@
         <div class="row">
             <div class="col-lg-3"></div>
             <div class="col-lg-7">
-                <img src="images/dino.gif" alt="Dinochrome">
+                <img src="../images/dino.gif" alt="Dinochrome">
             </div>
             <div class="col-lg-2"></div>
         </div>

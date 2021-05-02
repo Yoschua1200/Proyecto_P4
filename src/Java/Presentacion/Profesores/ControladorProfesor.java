@@ -17,7 +17,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Boris Monge
  */
-@WebServlet(name = "ControladorProfesor", urlPatterns = {"/RegistroProfesor", "/EliminarProfesor", "/ConsultarProfesor", "/EditarProfesor"})
+@WebServlet(name = "ControladorProfesor", urlPatterns = {"/Presentacion.Vistas/RegistroProfesor", 
+                    "/Presentacion.Vistas/EliminarProfesor", 
+                    "/Presentacion.Vistas/ConsultarProfesor", 
+                    "/Presentacion.Vistas/EditarProfesor"})
 public class ControladorProfesor extends HttpServlet {
 ModeloProfesor mp = new ModeloProfesor();
     /**
@@ -32,7 +35,7 @@ ModeloProfesor mp = new ModeloProfesor();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-          if ("/RegistroProfesor".equals(request.getServletPath())) {
+          if ("/Presentacion.Vistas/RegistroProfesor".equals(request.getServletPath())) {
             String cedula = request.getParameter("cedula");
             request.setAttribute("cedula", cedula);
             String nombre = request.getParameter("nombre");
@@ -57,27 +60,27 @@ ModeloProfesor mp = new ModeloProfesor();
             boolean x = mp.getProfd().agregar(mp.getProfesor());
              if(x==true){ request.setAttribute("flagA", "si");}
             else{request.setAttribute("flagA", "no");}
-            request.getRequestDispatcher("admin.jsp").forward(request, response);
+            request.getRequestDispatcher("/Presentacion.Vistas/admin.jsp").forward(request, response);
           }
-          else if ("/EliminarProfesor".equals(request.getServletPath())){
+          else if ("/Presentacion.Vistas/EliminarProfesor".equals(request.getServletPath())){
               boolean x = mp.getProfd().eliminar(Integer.parseInt(request.getParameter("CedElim")));
                 if(x==true){ request.setAttribute("flagE", "si");}
             else{request.setAttribute("flagE", "no");}
-               request.getRequestDispatcher("admin.jsp").forward(request, response);   
+               request.getRequestDispatcher("/Presentacion.Vistas/admin.jsp").forward(request, response);   
           }
-           else if("/ConsultarProfesor".equals(request.getServletPath())){
+           else if("/Presentacion.Vistas/ConsultarProfesor".equals(request.getServletPath())){
              String cedProf = request.getParameter("cedulaConsul");
              request.setAttribute("ConsultaProfesor", cedProf);
-             request.getRequestDispatcher("admin.jsp").forward(request, response); 
+             request.getRequestDispatcher("/Presentacion.Vistas/admin.jsp").forward(request, response); 
               
          }
-            else if("/EditarProfesor".equals(request.getServletPath())){
+            else if("/Presentacion.Vistas/EditarProfesor".equals(request.getServletPath())){
              String correo = request.getParameter("correoEdit");
              String ced = request.getParameter("cedProf");
              boolean x = mp.getProfd().editarProfesor(Integer.parseInt(ced), correo);
               if(x==true){ request.setAttribute("flagEd", "si");}
               else{request.setAttribute("flagEd", "no");}
-             request.getRequestDispatcher("admin.jsp").forward(request, response); 
+             request.getRequestDispatcher("/Presentacion.Vistas/admin.jsp").forward(request, response); 
               
          }
     }

@@ -42,7 +42,7 @@
                             <div class="col-lg-6">
 
 
-                                <img src="images/<%= c.getLogo()%>"  class="rounded img-fluid" alt="Placeholder image"> 
+                                <img src="../images/<%= c.getLogo()%>"  class="rounded img-fluid" alt="Placeholder image"> 
                             </div>
                             <div class="col-lg-6">
                                 <table width="100%" >

@@ -12,7 +12,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>CursosLibres.com</title>
-        <link rel="shortcut icon" href="images/logo.ico" type="">
+        <link rel="shortcut icon" href="../images/logo.ico" type="">
     </head>
 <body style="padding-top: 70px">
 <%@ include file="header.jsp" %>
@@ -24,7 +24,7 @@
             Sign in
         </h2>
         
-      <form action="RegistroEstudiante" method="POST">
+      <form action="/Proyecto_P4/Presentacion.Vistas/RegistroEstudiante" method="POST">
         <div class="form-group">
           <label>Número de cédula</label>
           <input type="text" name="cedula" class="form-control" placeholder="Cédula">

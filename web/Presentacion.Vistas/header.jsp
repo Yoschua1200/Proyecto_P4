@@ -24,9 +24,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CursosLibres.com</title>
-<link href="css/bootstrap-4.4.1.css" rel="stylesheet" type="text/css">
-<link href="css/style.css" rel="stylesheet" type="text/css">
-<link rel="shortcut icon" href="images/logo.ico" type="">
+<link href="../css/bootstrap-4.4.1.css" rel="stylesheet" type="text/css">
+<link href="../css/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="../images/logo.ico" type="">
 
 </head>
 <nav class="navbar fixed-top navbar-expand-lg color-menu bg-light" > 
@@ -34,7 +34,8 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent1">
         <ul class="navbar-nav mx-auto">
-            <form class="form-inline my-2 my-lg-0" action="BuscarCurso" method="POST">
+            <!--action="/Guia/presentation/login/login"-->
+            <form class="form-inline my-2 my-lg-0" action="/Proyecto_P4/Presentacion.Vistas/BuscarCurso" method="POST">
                 <input class="form-control mr-sm-2" type="text" name ="nombre" placeholder="Buscar cursos" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
             </form>

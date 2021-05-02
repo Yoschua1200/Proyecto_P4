@@ -11,7 +11,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>CursosLibres.com</title>
-        <link rel="shortcut icon" href="images/logo.ico" type="">
+        <link rel="shortcut icon" href="../images/logo.ico" type="">
     </head>
     <body style="padding-top: 70px; padding-bottom: 70px;">
 
@@ -27,7 +27,7 @@
 
                     <div class="row">
                         <div class="col-lg-4"> 
-                            <img src="images/zhongli.png" class="rounded-circle img-fluid" alt="Placeholder image">
+                            <img src="../images/zhongli.png" class="rounded-circle img-fluid" alt="Placeholder image">
                         </div>
 
                         <div class="col-lg-8"> 

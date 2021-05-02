@@ -6,8 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<head> <link href="css/bootstrap-4.4.1.css" rel="stylesheet" type="text/css">
-    <link href="css/style.css" rel="stylesheet" type="text/css"><!-- comment --></head>
+<head> <link href="../css/bootstrap-4.4.1.css" rel="stylesheet" type="text/css">
+    <link href="../css/style.css" rel="stylesheet" type="text/css"><!-- comment --></head>
 <footer>
     <h4 class="pie">Qwerty Labs</h4>
     <h6 class="pie">Universidad Nacional de Costa Rica </h6>
