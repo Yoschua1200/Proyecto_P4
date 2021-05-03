@@ -20,35 +20,35 @@ import java.util.List;
  * @author Boris Monge
  */
 public class GrupoDatos {
-Conexion cnx = new Conexion();
-       Connection cn;
-       PreparedStatement ps;
-       ResultSet rs;
-       CursoDatos cd = new CursoDatos();
-       ProfesorDatos pf = new ProfesorDatos();
-     
-       
-    
+
+    Conexion cnx = new Conexion();
+    Connection cn;
+    PreparedStatement ps;
+    ResultSet rs;
+    CursoDatos cd = new CursoDatos();
+    ProfesorDatos pf = new ProfesorDatos();
+
     public List listar() {
-       ArrayList<Grupo>lista = new ArrayList<>();
-       String sql = "select * from grupos";
+        ArrayList<Grupo> lista = new ArrayList<>();
+        String sql = "select * from grupos";
         try {
             cn = cnx.getConnection();
-            ps = (PreparedStatement)cn.prepareStatement(sql);
+            ps = (PreparedStatement) cn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-             Grupo g = new Grupo();
-             g.setId(rs.getInt("id"));
-             g.setCurso(cd.consultarCurso(rs.getInt("codigo_curso")));
-             g.setProfesor((Profesor) pf.consultar(rs.getInt("cedula_profesor")));
-             g.setHora(rs.getString("horario"));
-             lista.add(g);
+                Grupo g = new Grupo();
+                g.setId(rs.getInt("id"));
+                g.setCurso(cd.consultarCurso(rs.getInt("codigo_curso")));
+                g.setProfesor((Profesor) pf.consultar(rs.getInt("cedula_profesor")));
+                g.setHora(rs.getString("horario"));
+                lista.add(g);
             }
-    }catch(SQLException e){
-        
+        } catch (SQLException e) {
+
+        }
+        return lista;
     }
-       return lista;
-    }
+
     /*public static void main(String[] args) {
          CursosDatos k = new CursosDatos();
          
@@ -56,18 +56,18 @@ Conexion cnx = new Conexion();
          System.out.println(k.consultar("Virtual Box").toString());
      }*/
     public Grupo consultar(int id) {
-          Grupo g = new Grupo();
+        Grupo g = new Grupo();
         //String sql = "SELECT * FROM cursos WHERE nombre ='" + nombre +"'";
-        String sql = "SELECT * FROM grupos WHERE id="+id;
+        String sql = "SELECT * FROM grupos WHERE id=" + id;
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-             g.setId(rs.getInt("id"));
-             g.setCurso(cd.consultarCurso(rs.getInt("codigo_curso")));
-             g.setProfesor((Profesor) pf.consultar(rs.getInt("cedula_profesor")));
-             g.setHora(rs.getString("horario"));
+                g.setId(rs.getInt("id"));
+                g.setCurso(cd.consultarCurso(rs.getInt("codigo_curso")));
+                g.setProfesor((Profesor) pf.consultar(rs.getInt("cedula_profesor")));
+                g.setHora(rs.getString("horario"));
             }
         } catch (SQLException e) {
 
@@ -75,9 +75,10 @@ Conexion cnx = new Conexion();
         return g;
 
     }
+
     public boolean agregar(Grupo g) {
         String sql = "insert into grupos(cedula_profesor,codigo_curso,horario)"
-                + "values(" + g.getProfesor().getCedula() + "," + g.getCurso().getCodigo()+",'"+g.getHora()+"')"; 
+                + "values(" + g.getProfesor().getCedula() + "," + g.getCurso().getCodigo() + ",'" + g.getHora() + "')";
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);
@@ -88,22 +89,8 @@ Conexion cnx = new Conexion();
         return true;
     }
 
-    
     public boolean editarGrupo(int id, Profesor p) {
-        String sql = "update grupos set cedula_profesor ="+p.getCedula()+" where id="+id;
-        try {
-            cn = cnx.getConnection();
-            ps = (PreparedStatement) cn.prepareStatement(sql);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            return false;
-        }
-     return true;
-    }
-
-   
-    public boolean eliminar(int id) {
-        String sql = "delete from grupos where id="+id;
+        String sql = "update grupos set cedula_profesor =" + p.getCedula() + " where id=" + id;
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);
@@ -113,5 +100,59 @@ Conexion cnx = new Conexion();
         }
         return true;
     }
-    
+
+    public boolean eliminar(int id) {
+        String sql = "delete from grupos where id=" + id;
+        try {
+            cn = cnx.getConnection();
+            ps = (PreparedStatement) cn.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            return false;
+        }
+        return true;
+    }
+
+    public Grupo consultar_por_id_de_curso(int id) {
+        Grupo g = new Grupo();
+
+        String sql = "SELECT * FROM grupos WHERE codigo_curso=" + id;
+        try {
+            cn = cnx.getConnection();
+            ps = (PreparedStatement) cn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                g.setId(rs.getInt("id"));
+                g.setCurso(cd.consultarCurso(rs.getInt("codigo_curso")));
+                g.setProfesor((Profesor) pf.consultar(rs.getInt("cedula_profesor")));
+                g.setHora(rs.getString("horario"));
+            }
+        } catch (SQLException e) {
+
+        }
+        return g;
+
+    }
+
+    public ArrayList<Grupo> listar_por_curso_asociado(int id) {
+        ArrayList<Grupo> lista = new ArrayList<>();
+        String sql = "select * from grupos WHERE codigo_curso=" + id;
+        try {
+            cn = cnx.getConnection();
+            ps = (PreparedStatement) cn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Grupo g = new Grupo();
+                g.setId(rs.getInt("id"));
+                g.setCurso(cd.consultarCurso(rs.getInt("codigo_curso")));
+                g.setProfesor((Profesor) pf.consultar(rs.getInt("cedula_profesor")));
+                g.setHora(rs.getString("horario"));
+                lista.add(g);
+            }
+        } catch (SQLException e) {
+
+        }
+        return lista;
+    }
+
 }

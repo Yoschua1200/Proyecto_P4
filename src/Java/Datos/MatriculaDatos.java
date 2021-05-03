@@ -8,6 +8,7 @@ package Datos;
 import Logica.Curso;
 import Logica.Estudiante;
 import Logica.Grupo;
+import Logica.HistorialEst;
 import Logica.Matricula;
 import Logica.Profesor;
 import com.mysql.jdbc.Connection;
@@ -106,6 +107,27 @@ public class MatriculaDatos {
             return false;
         }
         return true;
+    }
+    public List listar_hist_est(int id) {
+        ArrayList<HistorialEst> lista = new ArrayList<>();
+        String sql = "SELECT * FROM historial_est WHERE ced_est="+id;
+        try {
+            cn = cnx.getConnection();
+            ps = (PreparedStatement) cn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                HistorialEst h = new HistorialEst();
+                h.setCed_est(rs.getInt("ced_est"));
+                h.setHorario(rs.getString("horario"));
+                h.setNombre_curso(rs.getString("nombre_curso"));
+                h.setNombre_prof(rs.getString("nombre_prof"));
+
+                lista.add(h);
+            }
+        } catch (SQLException e) {
+
+        }
+        return lista;
     }
     
 }

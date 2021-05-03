@@ -25,8 +25,7 @@ import javax.servlet.http.HttpServletResponse;
                                 "/Presentacion.Vistas/EditarCurso", 
                                 "/Presentacion.Vistas/BuscarCurso", 
                                 "/Presentacion.Vistas/EliminarCurso", 
-                                "/Presentacion.Vistas/ConsultarCurso", 
-                                "/Presentacion.Vistas/Matricular", 
+                                "/Presentacion.Vistas/ConsultarCurso",  
                                 "/Presentacion.Vistas/Index"})
 public class ControladorCurso extends HttpServlet {
 
