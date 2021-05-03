@@ -27,9 +27,9 @@
 <html>
     <head>
         <!-- Bootstrap core CSS -->
-        <link href="../../../../Documentos/NetBeansProjects/PruebaJsp/web/recursos/css/specific.css" rel="stylesheet" type="text/css"/>
-        <link href="../../../../Documentos/NetBeansProjects/PruebaJsp/web/recursos/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-        <link href="../../../../Documentos/NetBeansProjects/PruebaJsp/web/recursos/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="../css/specific.css" rel="stylesheet" type="text/css"/>
+        <link href="../css/bootstrap-4.4.1.css" rel="stylesheet" type="text/css"/>
+        <link href="../css/style.css" rel="stylesheet" type="text/css"/>
         <style>
             body{
                 background-color: #1c1d1f;

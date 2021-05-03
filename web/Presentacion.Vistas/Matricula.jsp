@@ -28,7 +28,7 @@
     <head>
         <!-- Bootstrap core CSS -->
         <link href="../css/specific.css" rel="stylesheet" type="text/css"/>
-        <link href="../css/bootstrap-4.4.1.css" rel="stylesheet" type="text/css"/>
+        <link href="../css/style.css" rel="stylesheet" type="text/css"/>
         <link href="../css/style.css" rel="stylesheet" type="text/css"/>
         <style>
             body{
@@ -57,7 +57,7 @@
                     <th>Horario</th>
                     <th>
                         <h2 class="c2">Matricular</h2>
-                        <img src="recursos/imagenes/cheque.png" alt=""/>
+                        <img src="../images/cheque.png" alt=""/>
                     </th>
 
                 </tr>
