@@ -21,7 +21,7 @@ import Logica.*;
  *
  * @author yosch
  */
-@WebServlet(name = "Matricular", urlPatterns = {"/Presentacion.Vistas/Matricular","/Presentacion.Vistas/MatricularGrupo"})
+@WebServlet(name = "Matricular", urlPatterns = {"/Presentacion.Vistas/Matricular", "/Presentacion.Vistas/MatricularGrupo"})
 
 public class Matricular extends HttpServlet {
 
@@ -36,21 +36,34 @@ public class Matricular extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        int cod=0;
         switch (request.getServletPath()) {
+            
             case "/Presentacion.Vistas/Matricular":
-                int cod = Integer.parseInt(request.getParameter("codCurso"));
+                cod= Integer.parseInt(request.getParameter("codCurso"));
                 request.setAttribute("codCurso", cod);
                 request.getRequestDispatcher("/Presentacion.Vistas/Matricula.jsp").forward(request, response);
                 break;
             case "/Presentacion.Vistas/MatricularGrupo":
                 int cod2 = Integer.parseInt(request.getParameter("codGrupo"));
+                int ced_estu = (int)request.getSession().getAttribute("cedulaEst");
+                //String cedula_est= (String)request.getSession().getAttribute("cedulaEst");
+                request.setAttribute("cedula",ced_estu);
+                boolean matriculado=this.matricularEst(cod2, ced_estu);
+                
+                if(!matriculado){
+                request.setAttribute("curso_repetido","si");
+                request.getRequestDispatcher("/Presentacion.Vistas/Matricula.jsp").forward(request, response);
+                }
+                else{
+                request.setAttribute("curso_repetido","no");
                 request.setAttribute("codGrupo", cod2);
-                request.getRequestDispatcher("/Presentacion.Vistas/historial.jsp").forward(request, response);
+                request.getRequestDispatcher("/Presentacion.Vistas/estudiante.jsp").forward(request, response);
+                }
                 break;
 
         }
-       
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -91,5 +104,29 @@ public class Matricular extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private boolean matricularEst(int codGrupo, int id_estudiante) {
+        Matricula m1 = new Matricula();
+        GrupoDatos g1 = new GrupoDatos();
+        Grupo g_asociado = g1.consultar(codGrupo);
+        EstudianteDatos ed = new EstudianteDatos();
+        Estudiante e1 = ed.consultarEstudiante(id_estudiante);
+
+        m1.setEstudiante(e1);
+        m1.setGrupo(g_asociado);
+
+        MatriculaDatos md = new MatriculaDatos();
+        return md.agregar(m1);
+    }
+    private boolean grupo_curso_agregado(int id_est, int id_grupo){
+        MatriculaDatos m1 = new MatriculaDatos();
+        Matricula m2 = m1.consultar_mat_repetida(id_est, id_grupo);
+        if(m2.getGrupo()==null || m2.getEstudiante()==null){
+        return true;
+        }
+        else {
+        return false;
+        }
+    }
 
 }

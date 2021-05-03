@@ -23,35 +23,35 @@ import java.util.List;
  * @author Boris Monge
  */
 public class MatriculaDatos {
+
     Conexion cnx = new Conexion();
-       Connection cn;
-       PreparedStatement ps;
-       ResultSet rs;
-       GrupoDatos cd = new GrupoDatos();
-       EstudianteDatos ed = new EstudianteDatos();
-     
-       
-    
+    Connection cn;
+    PreparedStatement ps;
+    ResultSet rs;
+    GrupoDatos cd = new GrupoDatos();
+    EstudianteDatos ed = new EstudianteDatos();
+
     public List listar() {
-       ArrayList<Matricula>lista = new ArrayList<>();
-       String sql = "select * from matriculas";
+        ArrayList<Matricula> lista = new ArrayList<>();
+        String sql = "select * from matriculas";
         try {
             cn = cnx.getConnection();
-            ps = (PreparedStatement)cn.prepareStatement(sql);
+            ps = (PreparedStatement) cn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-             Matricula m = new Matricula();
-             m.setId(rs.getInt("id"));
-             m.setGrupo(cd.consultar(rs.getInt("id_grupo")));
-             m.setEstudiante((Estudiante) ed.consultar(rs.getInt("id_estudiante")));
-             m.setNota(rs.getFloat("nota_estudiante"));
-             lista.add(m);
+                Matricula m = new Matricula();
+                m.setId(rs.getInt("id"));
+                m.setGrupo(cd.consultar(rs.getInt("id_grupo")));
+                m.setEstudiante((Estudiante) ed.consultar(rs.getInt("id_estudiante")));
+                m.setNota(rs.getFloat("nota_estudiante"));
+                lista.add(m);
             }
-    }catch(SQLException e){
-        
+        } catch (SQLException e) {
+
+        }
+        return lista;
     }
-       return lista;
-    }
+
     /*public static void main(String[] args) {
          CursosDatos k = new CursosDatos();
          
@@ -59,18 +59,18 @@ public class MatriculaDatos {
          System.out.println(k.consultar("Virtual Box").toString());
      }*/
     public Matricula consultar(int id) {
-          Matricula m = new Matricula();
+        Matricula m = new Matricula();
         //String sql = "SELECT * FROM cursos WHERE nombre ='" + nombre +"'";
-        String sql = "SELECT * FROM matriculas WHERE id="+id;
+        String sql = "SELECT * FROM matriculas WHERE id=" + id;
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-             m.setId(rs.getInt("id"));   
-             m.setGrupo(cd.consultar(rs.getInt("id_grupo")));
-             m.setEstudiante((Estudiante) ed.consultar(rs.getInt("id_estudiante")));
-             m.setNota(rs.getFloat("nota_estudiante"));
+                m.setId(rs.getInt("id"));
+                m.setGrupo(cd.consultar(rs.getInt("id_grupo")));
+                m.setEstudiante((Estudiante) ed.consultar(rs.getInt("id_estudiante")));
+                m.setNota(rs.getFloat("nota_estudiante"));
             }
         } catch (SQLException e) {
 
@@ -78,27 +78,27 @@ public class MatriculaDatos {
         return m;
 
     }
+
     public boolean agregar(Matricula m) {
         String sql = "insert into matriculas(id,id_grupo,id_estudiante,nota_estudiante)"
-                + "values('"+m.getId()+"','"+ m.getGrupo().getId() + "','" + m.getEstudiante().getCedula()+ "','" + m.getNota()+"')";
+                + "values('" + m.getId() + "','" + m.getGrupo().getId() + "','" + m.getEstudiante().getCedula() + "','" + m.getNota() + "')";
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);
             ps.executeUpdate();
+            //this.actualizarHistorial();
         } catch (SQLException e) {
             return false;
         }
         return true;
     }
 
-    
     public boolean editar(Curso cur) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-   
     public boolean eliminar(int id) {
-        String sql = "delete from matriculas where cedula="+id;
+        String sql = "delete from matriculas where cedula=" + id;
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);
@@ -108,9 +108,10 @@ public class MatriculaDatos {
         }
         return true;
     }
+
     public List listar_hist_est(int id) {
         ArrayList<HistorialEst> lista = new ArrayList<>();
-        String sql = "SELECT * FROM historial_est WHERE ced_est="+id;
+        String sql = "SELECT * FROM historial_est WHERE ced_est=" + id;
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);
@@ -129,5 +130,43 @@ public class MatriculaDatos {
         }
         return lista;
     }
-    
+
+    public Matricula consultar_mat_repetida(int id_est, int id_grupo) {
+        Matricula m = new Matricula();
+        String sql = "SELECT * FROM matriculas WHERE id_estudiante=" + id_est + "and id_grupo=" + id_grupo;
+        try {
+            cn = cnx.getConnection();
+            ps = (PreparedStatement) cn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                m.setId(rs.getInt("id"));
+                m.setGrupo(cd.consultar(rs.getInt("id_grupo")));
+                m.setEstudiante((Estudiante) ed.consultar(rs.getInt("id_estudiante")));
+                m.setNota(rs.getFloat("nota_estudiante"));
+            }
+        } catch (SQLException e) {
+
+        }
+        return m;
+
+    }
+
+    public void actualizarHistorial() {
+
+        String sql = "CREATE or REPLACE VIEW historial_est as SELECT e.cedula ced_est,c.nombre nombre_curso ,p.nombre nombre_prof,g.horario \n"
+                + "from estudiantes e,cursos c, profesores p , grupos g ,matriculas m \n"
+                + "where g.cedula_profesor=p.cedula and \n"
+                + "g.codigo_curso = c.codigo and \n"
+                + "m.id_estudiante = e.cedula and m.id_grupo=g.id ;";
+        try {
+            cn = cnx.getConnection();
+            ps = (PreparedStatement) cn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+        } catch (SQLException e) {
+
+        }
+
+    }
+
 }

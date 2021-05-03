@@ -67,9 +67,9 @@
                                             <h5>Logo: <%= c.getLogo()%></h5>
                                         </tr>
                                         <tr>
-                                           <form action="/Proyecto_P4/Presentacion.Vistas/Matricular",",class="form-inline my-2 my-lg-0" , method="POST">
+                                           <form action="/Proyecto_P4/Presentacion.Vistas/Matricular",class="form-inline my-2 my-lg-0" , method="POST">
                                                 <button type="submit" class="btn btn-primary btn-lg">Ver Grupos Disponibles</button>
-                                                <input  name="codCurso" value=<%=c.getCodigo()%> />
+                                                <input type="hidden"  name="codCurso" value=<%=c.getCodigo()%> />
                                             </form>
                                         </tr>
                                     </tbody>

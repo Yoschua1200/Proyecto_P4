@@ -11,16 +11,17 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     List<HistorialEst> hist_est = null;
-    //tomar el id del estudiante en la sesion 
-    //String cod_curso = (String) request.getParameter("codCurso");
-    /* if (cod_curso != null) {
-        int cod = Integer.parseInt(request.getParameter("codCurso"));
-
-        GrupoDatos g1 = new GrupoDatos();
-        grupos = g1.listar_por_curso_asociado(cod);
-    }*/
     MatriculaDatos m1 = new MatriculaDatos();
-    hist_est = m1.listar_hist_est(123456789);
+    //tomar el id del estudiante en la sesion 
+    /*String ced = (String)(request.getParameter("cedula"));
+    if(ced!=null){
+      hist_est = m1.listar_hist_est(Integer.parseInt(ced));  
+    }*/
+    
+     //int ced_estu = (int)request.getSession().getAttribute("cedulaEst");
+     String ced=(String)request.getSession().getAttribute("cedulaString");
+     
+    hist_est = m1.listar_hist_est(Integer.parseInt(ced));
     //List<Grupo> grupos = g1.listar();
 %>
 <!DOCTYPE html>
@@ -41,6 +42,7 @@
     <br>
     <br>
     <br>
+  
     <br>
     <br>
     <br>
@@ -54,6 +56,7 @@
                 <th>Profesor</th>
                 <th>Horario</th>
             </tr>
+            
             <%if (hist_est != null) {%>
             <% if (!(hist_est.isEmpty())) {%>
             <% for (HistorialEst h : hist_est) {%>

@@ -70,7 +70,7 @@
                     <td><%=g.getHora()%></td>
                 <form action="/Proyecto_P4/Presentacion.Vistas/MatricularGrupo",method="POST">
                     <td><button type="submit" class="btn btn-primary btn-lg">Matricular</button></td>
-                    <input  name="codGrupo" value=<%=g.getId()%> />
+                    <input type="hidden",name="codGrupo" value=<%=g.getId()%> />
                 </form>
                 </tr>
 
