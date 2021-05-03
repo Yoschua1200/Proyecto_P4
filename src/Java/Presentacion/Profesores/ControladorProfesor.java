@@ -7,6 +7,7 @@ package Presentacion.Profesores;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.SecureRandom;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -50,6 +51,15 @@ ModeloProfesor mp = new ModeloProfesor();
             request.setAttribute("especialidad2", especialidad2);
             String especialidad3 = request.getParameter("especialidad3");
             request.setAttribute("especialidad3", especialidad3);
+            String clave = request.getParameter("clave");
+            request.setAttribute("clave", clave);
+            request.setAttribute("flagU", "si");
+            
+            mp.getUsuario().setCedula(Integer.parseInt(cedula));
+            mp.getUsuario().setClave(clave);
+            mp.getUsuario().setTipo(2);
+            mp.getUsuariod().agregar(mp.getUsuario());
+            
             mp.getProfesor().setCedula(Integer.parseInt(cedula));
             mp.getProfesor().setNombre(nombre);
             mp.getProfesor().setCorreo(correo);
@@ -57,6 +67,7 @@ ModeloProfesor mp = new ModeloProfesor();
             mp.getProfesor().setEspecialidad1(especialidad1);
             mp.getProfesor().setEspecialidad2(especialidad2);
             mp.getProfesor().setEspecialidad3(especialidad3);
+          
             boolean x = mp.getProfd().agregar(mp.getProfesor());
              if(x==true){ request.setAttribute("flagA", "si");}
             else{request.setAttribute("flagA", "no");}
@@ -84,7 +95,8 @@ ModeloProfesor mp = new ModeloProfesor();
               
          }
     }
-
+    
+   
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

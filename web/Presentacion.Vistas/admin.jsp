@@ -31,6 +31,9 @@
         <%String flagA = (String) request.getAttribute("flagA");%>
         <%String flagE = (String) request.getAttribute("flagE");%>
         <%String flagEd = (String) request.getAttribute("flagEd");%>
+        <%String flagU = (String) request.getAttribute("flagU");%>
+        <%String clave = (String) request.getAttribute("clave");%>
+        <%long num = ( int ) ( Math . random () * 10000 );%>
          
         <%if(flagA!=null){%>
          <%if(flagA.equalsIgnoreCase("si")){%>
@@ -42,6 +45,15 @@
             <p>Inserción realizada con éxito.</p>
             <hr>
         </div>
+        <%if(flagU!=null){%>
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="alert-heading">Clave para nuevo profesor: <%=clave%></h4>
+            <hr>
+        </div>
+        <%}%>
         <%}else{%>
         <div class="alert alert-danger" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -691,8 +703,11 @@
                                             <label>Tercera especialidad</label>
                                             <input type="text" class="form-control" name="especialidad3" placeholder="Especialidad 3">
                                         </div>
-                                        <div class="form-group">
-                                        </div>
+                     
+                                        <div  class = " form-group " >
+                                        <input type = "hidden" class = " form-control " name = "clave"  value = "<%=num%>">
+                                         </div>
+                                         
                                         <button type="submit" class="btn btn-primary">Registrar profesor</button>
                                     </form>
 

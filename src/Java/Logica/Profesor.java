@@ -50,6 +50,8 @@ private String especialidad3;
      this.especialidad2 = "";
      this.especialidad3 = "";
     }
+
+    
   
 
 

@@ -68,8 +68,10 @@
 	<div class="col-lg-3"></div>
   </div>
 </div>
+<%if(flagE!=null){%>
 <%if(flagE.equalsIgnoreCase("si")){%>
 <br> <br>
+<%}%>
 <%}%>
 
 </body>
