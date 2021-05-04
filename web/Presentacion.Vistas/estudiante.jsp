@@ -108,7 +108,11 @@
         <br> 
         <br> 
         <div class="container">
-            <button type="submit" class="btn btn-primary btn-lg">Generar Reporte en formato PDF</button>
+            <form action="/Proyecto_P4/Presentacion.Vistas/Imprimir",class="form-inline my-2 my-lg-0" , method="POST">
+                <button type="submit" class="btn btn-primary btn-lg">Generar Constancia en PDF</button>
+                <input type="hidden"  name="codCurso" value=<%="Novalue"%> />
+            </form>
+
         </div>
         <br>           
         <br> 
