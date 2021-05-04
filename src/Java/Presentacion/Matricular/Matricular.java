@@ -45,11 +45,11 @@ public class Matricular extends HttpServlet {
                 request.getRequestDispatcher("/Presentacion.Vistas/Matricula.jsp").forward(request, response);
                 break;
             case "/Presentacion.Vistas/MatricularGrupo":
-                int cod2 = Integer.parseInt(request.getParameter("codGrupo"));
-                int ced_estu = (int)request.getSession().getAttribute("cedulaEst");
-                //String cedula_est= (String)request.getSession().getAttribute("cedulaEst");
+                String cod2 = (String) request.getParameter("codGrupo");
+                String ced_estu = (String)request.getSession().getAttribute("cedulaString");
                 request.setAttribute("cedula",ced_estu);
-                boolean matriculado=this.matricularEst(cod2, ced_estu);
+                
+                boolean matriculado=this.matricularEst(Integer.parseInt(cod2), Integer.parseInt(ced_estu));
                 
                 if(!matriculado){
                 request.setAttribute("curso_repetido","si");
@@ -60,6 +60,7 @@ public class Matricular extends HttpServlet {
                 request.setAttribute("codGrupo", cod2);
                 request.getRequestDispatcher("/Presentacion.Vistas/estudiante.jsp").forward(request, response);
                 }
+                
                 break;
 
         }
