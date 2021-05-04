@@ -51,6 +51,18 @@
             hist_est = m1.listar_hist_est(Integer.parseInt(ced));
             //List<Grupo> grupos = g1.listar();
         %>
+        <%if(request.getParameter("curso_repetido")!=null){%>
+        <%if((request.getParameter("curso_repetido")).equalsIgnoreCase("no")){%>
+         <div class="alert alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="alert-heading">Curso Matriculado Correctamente</h4>
+            <p class="palert">Genial!! el curso se ha añadido de manera exitosa!.</p>
+            <hr>
+        </div>
+        <%}%>
+        <%}%>
         <div class="container"> 
             <div class="row">
                 <div class="col-lg-5">

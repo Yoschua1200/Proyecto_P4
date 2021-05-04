@@ -68,6 +68,10 @@ img {
     margin-right: auto;
     text-align: right;
 }
+.palert{
+    color: #a71d2a;
+    text-align: left;
+}
 td1{
     text-align: center;
 }

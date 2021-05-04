@@ -11,6 +11,7 @@
 <%@page import="Datos.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+   
     ArrayList<Grupo> grupos = null;
     String cod_curso = (String) request.getParameter("codCurso");
     if (cod_curso != null) {
@@ -48,6 +49,18 @@
         <br>
         <br>
         <br>
+        <br>
+        <%if (tipoUsuario != "1") {%>
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="alert-heading">¡Buen intento!</h4>
+            <p class="palert">No puedes ingresar sin iniciar sesión o no Tiene Permiso Para realizar la accion!!.</p>
+            <hr>
+        </div>
+        <%}%>
+        
         <div class="container">
             <h2>Grupos Disponibles</h2>
 
@@ -76,10 +89,10 @@
                     <input type = "hidden" name="codGrupo" class="form-control" value="<%= g.getId()%>" placeholder="Eliminar">
                 </form>
                 </tr>
-                <%} else {%>
+                <%} else { %>
                 <td>NO DISPONIBLE</td>
 
-                
+
                 <%}%>
                 <%}%>
                 <%}%>
@@ -105,22 +118,12 @@
 
         </div>
 
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        
-        <br>
-        <br>
-        <br>
        
         <br>
         <br>
-        <br><br><br><br>
+        <br>
+        <br>
+        <br>
     </body>
 
     <%@ include file="footer.jsp" %>

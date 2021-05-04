@@ -65,3 +65,7 @@ tr:nth-child(odd) {
 td1{
     text-align: center;
 }
+.palert{
+    color: #218838;
+    text-align: left;
+}
