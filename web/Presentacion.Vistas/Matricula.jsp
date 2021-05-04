@@ -32,6 +32,7 @@
         <link href="../css/style.css" rel="stylesheet" type="text/css"/>
         <link href="../css/style.css" rel="stylesheet" type="text/css"/>
         <link rel="shortcut icon" href="../images/logo.ico" type="">
+        <title>CursosLibres.com</title>
         <style>
             body{
                 background-color: #1c1d1f;
