@@ -118,6 +118,9 @@ public class ControladorAutenticacion extends HttpServlet {
                     
                     int cedulaPro = ma.getProfesor().getCedula();
                     request.getSession().setAttribute("cedulaPro", cedulaPro);
+                    String cedulaProf = String.valueOf(ma.getProfesor().getCedula());
+                    request.getSession().setAttribute("cedulaProf", cedulaProf);
+                    
                     String nombre = ma.getProfesor().getNombre();
                     request.getSession().setAttribute("nombre", nombre);
                     String correo = ma.getProfesor().getCorreo();

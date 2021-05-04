@@ -51,6 +51,26 @@ public class MatriculaDatos {
         }
         return lista;
     }
+    public List listarPorGrupo(int id) {
+        ArrayList<Matricula> lista = new ArrayList<>();
+        String sql = "select * from matriculas where id_grupo="+id;
+        try {
+            cn = cnx.getConnection();
+            ps = (PreparedStatement) cn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Matricula m = new Matricula();
+                m.setId(rs.getInt("id"));
+                m.setGrupo(cd.consultar(rs.getInt("id_grupo")));
+                m.setEstudiante((Estudiante) ed.consultar(rs.getInt("id_estudiante")));
+                m.setNota(rs.getInt("nota_estudiante"));
+                lista.add(m);
+            }
+        } catch (SQLException e) {
+
+        }
+        return lista;
+    }
 
     /*public static void main(String[] args) {
          CursosDatos k = new CursosDatos();
@@ -77,6 +97,18 @@ public class MatriculaDatos {
         }
         return m;
 
+    }
+    public boolean editarNotas(int nota, int id) {
+       String sql = "update matriculas set nota_estudiante ="+nota+" where id ="+id;
+
+      try {
+            cn = cnx.getConnection();
+            ps = (PreparedStatement) cn.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            return false;
+        }
+     return true;
     }
 
     public boolean agregar(Matricula m) {

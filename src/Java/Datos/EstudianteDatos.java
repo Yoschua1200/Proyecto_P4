@@ -55,7 +55,7 @@ Conexion cnx = new Conexion();
     public Persona consultar(int id) {
        
         Persona p = new Estudiante();
-        String sql = "SELECT * FROM estudiante WHERE cedula =" + id;
+        String sql = "SELECT * FROM estudiantes WHERE cedula =" + id;
         try {
             cn = cnx.getConnection();
             ps = (PreparedStatement) cn.prepareStatement(sql);

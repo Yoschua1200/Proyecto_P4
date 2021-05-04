@@ -47,10 +47,14 @@ import javax.servlet.http.Part;
  *
  * @author yosch
  */
-@WebServlet(name = "Matricular", urlPatterns = {"/Presentacion.Vistas/Matricular", "/Presentacion.Vistas/MatricularGrupo", "/Presentacion.Vistas/Imprimir"})
+@WebServlet(name = "Matricular", urlPatterns = {"/Presentacion.Vistas/Matricular", 
+        "/Presentacion.Vistas/MatricularGrupo", 
+        "/Presentacion.Vistas/Imprimir", "/Presentacion.Vistas/MeterCifra"})
 
 public class Matricular extends HttpServlet {
 
+    ModeloMatricula mm = new ModeloMatricula();
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -96,6 +100,13 @@ public class Matricular extends HttpServlet {
                 if (viewUrl != null) {
                     request.getRequestDispatcher(viewUrl).forward(request, response);
                 }
+                break;
+            case "/Presentacion.Vistas/MeterCifra":
+                String nota = request.getParameter("notaEst");
+                String id = request.getParameter("idMatricula");
+                request.setAttribute("banderaNota", "si");
+                mm.getMd().editarNotas(Integer.parseInt(nota), Integer.parseInt(id));
+                request.getRequestDispatcher("/Presentacion.Vistas/profesor.jsp").forward(request, response);
                 break;
 
         }

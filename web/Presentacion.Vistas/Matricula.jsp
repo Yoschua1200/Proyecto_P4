@@ -84,7 +84,7 @@
                     <td><%=g.getHora()%></td>
 
                     <% if (tipoUsuario == "1") {%>
-                <form action="/Proyecto_P4/Presentacion.Vistas/MatricularGrupo",method="POST">
+                <form action="/Proyecto_P4/Presentacion.Vistas/MatricularGrupo" method="POST">
                     <td><button type="submit" class="btn btn-primary btn-lg">Matricular</button></td>
                     <input type = "hidden" name="codGrupo" class="form-control" value="<%= g.getId()%>" placeholder="Eliminar">
                 </form>

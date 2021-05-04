@@ -48,6 +48,27 @@ public class GrupoDatos {
         }
         return lista;
     }
+    public List consultarPorProf(int id) {
+        ArrayList<Grupo> lista = new ArrayList<>();
+        String sql = "SELECT * FROM grupos WHERE cedula_profesor="+id;
+        try {
+            cn = cnx.getConnection();
+            ps = (PreparedStatement) cn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+              Grupo g = new Grupo();
+              g.setId(rs.getInt("id"));
+                g.setCurso(cd.consultarCurso(rs.getInt("codigo_curso")));
+                g.setProfesor((Profesor) pf.consultar(rs.getInt("cedula_profesor")));
+                g.setHora(rs.getString("horario"));
+                lista.add(g);
+            }
+        } catch (SQLException e) {
+
+        }
+        return lista;
+
+    }
 
     /*public static void main(String[] args) {
          CursosDatos k = new CursosDatos();
