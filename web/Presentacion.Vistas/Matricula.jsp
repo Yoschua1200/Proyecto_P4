@@ -30,6 +30,7 @@
         <link href="../css/specific.css" rel="stylesheet" type="text/css"/>
         <link href="../css/style.css" rel="stylesheet" type="text/css"/>
         <link href="../css/style.css" rel="stylesheet" type="text/css"/>
+        <link rel="shortcut icon" href="../images/logo.ico" type="">
         <style>
             body{
                 background-color: #1c1d1f;
@@ -68,12 +69,18 @@
                     <td><%=g.getCurso().getNombre()%></td>
                     <td><%=g.getProfesor().getNombre()%></td>
                     <td><%=g.getHora()%></td>
+
+                    <% if (tipoUsuario == "1") {%>
                 <form action="/Proyecto_P4/Presentacion.Vistas/MatricularGrupo",method="POST">
                     <td><button type="submit" class="btn btn-primary btn-lg">Matricular</button></td>
                     <input type = "hidden" name="codGrupo" class="form-control" value="<%= g.getId()%>" placeholder="Eliminar">
                 </form>
                 </tr>
+                <%} else {%>
+                <td>NO DISPONIBLE</td>
 
+                
+                <%}%>
                 <%}%>
                 <%}%>
 
@@ -84,8 +91,8 @@
                 <td>NO DISPONIBLE</td>
                 <%}%>
                 <%}%>
-                
-                <%if (grupos==null) {%>
+
+                <%if (grupos == null) {%>
                 <td>NO DISPONIBLE</td>
                 <td>NO DISPONIBLE</td>
                 <td>NO DISPONIBLE</td>
@@ -113,10 +120,7 @@
        
         <br>
         <br>
-        <br>
-        <br>
-        <br>
-        <br>
+        <br><br><br><br>
     </body>
 
     <%@ include file="footer.jsp" %>
