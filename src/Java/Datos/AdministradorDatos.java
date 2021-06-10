@@ -98,8 +98,7 @@ Conexion cnx = new Conexion();
             
     @Override
     public boolean agregar(Persona per) {
-          String sql = "insert into administradores(cedula, nombre, correo, telefono)"
-                + "values('"+ per.getCedula() +"','" + per.getNombre() + "','" 
+          String sql = "insert into administradores(cedula, nombre, correo, telefono)" + "values('"+ per.getCedula() +"','" + per.getNombre() + "','" 
                 + per.getCorreo()+ "','" + per.getTelefono()+"')";
         try {
             cn = cnx.getConnection();
